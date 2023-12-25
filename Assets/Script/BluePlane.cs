@@ -10,7 +10,9 @@ public class NewBehaviourScript : MonoBehaviour
     [SerializeField]
     private GameObject _redLaserPrefab;
     private float _firerate = 0.5f;
-    private float _coolDown = -1f; 
+    private float _coolDown = -1f;
+    [SerializeField]
+    private int _lives = 3;
    
 
     // Start is called before the first frame update
@@ -30,6 +32,7 @@ public class NewBehaviourScript : MonoBehaviour
             Instantiate(_redLaserPrefab,transform.position + new Vector3(1.15f, 1.05f, 0), Quaternion.identity);
             Instantiate(_redLaserPrefab,transform.position + new Vector3(-1.15f, 1.05f, 0), Quaternion.identity);
         }
+
     }
 
     void Movement()
@@ -60,4 +63,15 @@ public class NewBehaviourScript : MonoBehaviour
             transform.position = new Vector3(11.3f, transform.position.y, 0);
         }
     }
+
+    public void Damage()
+    {
+        _lives --;
+
+        if (_lives < 1)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
 }

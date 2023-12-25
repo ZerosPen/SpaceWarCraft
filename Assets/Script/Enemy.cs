@@ -7,12 +7,12 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float _ramspeed = 5.0f;
 
-    public 
-    
+    public
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -26,8 +26,23 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("We Been RAM BY ENEMY! The cordinet is " + other.transform.name);
+        if (other.tag == "BluePlane")
+        {
+            NewBehaviourScript player = other.GetComponent<NewBehaviourScript>();
+            if (player != null)
+            {
+                player.Damage();
+            }
+            Destroy(this.gameObject);
+        }
+
+        if (other.tag == "RedLaser")
+        {
+            Destroy(other.gameObject);
+            Destroy(this.gameObject);
+        }
+
     }
 }
