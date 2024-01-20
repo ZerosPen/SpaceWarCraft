@@ -2,28 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sheild : MonoBehaviour
+public class LaserEnemyShot : MonoBehaviour
 {
-    [SerializeField]
-    private int _HSP = 100;
+    private GameObject player;
+    private Rigidbody rb;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
     void Update()
     {
         
-    }
-
-    public void SheildReduce()
-    {
-        _HSP--;
-        if (_HSP > 1)
-        {
-            Destroy(this.gameObject);
-        }
     }
 }

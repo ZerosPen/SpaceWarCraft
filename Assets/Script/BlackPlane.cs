@@ -59,4 +59,14 @@ public class BlackPlane : MonoBehaviour
         }
     }
 
+    public void Damage()
+    {
+        _lives--;
+
+        if (_lives < 1)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
 }

@@ -37,7 +37,7 @@ public class GrayePlane : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        Vector3 direction  =  new Vector3(horizontalInput, verticalInput, 0);
+        Vector3 direction = new Vector3(horizontalInput, verticalInput, 0);
 
         transform.Translate(direction * _speed * Time.deltaTime);
 
@@ -58,17 +58,17 @@ public class GrayePlane : MonoBehaviour
 
         else if (transform.position.x < -11.3f)
         {
-            transform.position = new Vector3 (11.3f, transform.position.y, 0);
+            transform.position = new Vector3(11.3f, transform.position.y, 0);
         }
+    }
 
-/*        public void Damage()
+    public void Damage()
+    {
+        _lives--;
+
+        if (_lives < 1)
         {
-            _lives--;
-
-            if (_lives < 1)
-            {
-                Destroy(this.gameObject);
-            }
-        }*/
+            Destroy(this.gameObject);
+        }
     }
 }

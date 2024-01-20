@@ -16,14 +16,12 @@ public class NewBehaviourScript : MonoBehaviour
     private float _coolDown = 0.5f;
 
     private bool _quadFiringAct = false;
-    private bool _sheildAct = false;
-
-
-   /* [SerializeField]
-    private GameObject _HexaSheild;
     [SerializeField]
-    private float _coolDownSkill = -5f;
-    private float _duration = 10f;*/
+    private GameObject _shieldVisual;
+
+    private SpawnManager _spawnManager;
+    private float _SheildCoolDown = 3.5f;
+
 
     [SerializeField]
     private int _lives = 3;
@@ -33,6 +31,11 @@ public class NewBehaviourScript : MonoBehaviour
     void Start()
     {
         transform.position = new Vector3(0, 0, 0);
+        _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
+        if(_spawnManager == null)
+        {
+            Debug.LogError("The Spawn Manager is NULL");
+        }
     }
 
     // Update is called once per frame
@@ -45,12 +48,12 @@ public class NewBehaviourScript : MonoBehaviour
             FireLaser();
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.E) && Time.time > _SheildCoolDown)
         {
             shieldIsActiv();
         }
 
-        if (Input.GetKeyDown(KeyCode.E)) 
+        if (Input.GetKeyDown(KeyCode.Q)) 
         {
             QuadFiringAct();
         }
@@ -105,18 +108,6 @@ public class NewBehaviourScript : MonoBehaviour
         }
     }
 
-    public void shieldIsActiv()
-    {
-        _sheildAct= true;
-        StartCoroutine(SheildDownTime());
-    }
-
-    IEnumerator SheildDownTime()
-    {
-        yield return new WaitForSeconds(15.0f);
-        _sheildAct= false;
-    }
-
     void QuadFiringAct()
     {
         _quadFiringAct = true;
@@ -128,6 +119,18 @@ public class NewBehaviourScript : MonoBehaviour
         yield return new WaitForSeconds(5.0f);
         _quadFiringAct = false;
     }
+    public void shieldIsActiv()
+    {
+        _shieldVisual.SetActive(true);
+        StartCoroutine(SheildDownTime());
+    }
+
+    IEnumerator SheildDownTime()
+    {
+        yield return new WaitForSeconds(15.0f);
+        _shieldVisual.SetActive(false);
+    }
+
 
     public void Damage()
     {
@@ -136,6 +139,7 @@ public class NewBehaviourScript : MonoBehaviour
         if (_lives < 1)
         {
             Destroy(this.gameObject);
+            _spawnManager.OnPlayerDeath();
         }
     }
 

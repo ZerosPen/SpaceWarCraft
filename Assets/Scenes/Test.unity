@@ -232,7 +232,7 @@ GameObject:
   - component: {fileID: 409002414}
   m_Layer: 0
   m_Name: GaryPlane
-  m_TagString: Untagged
+  m_TagString: GrayPlane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -367,6 +367,90 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.4799998, y: 3.3922124, z: 0.2}
   m_Center: {x: 0, y: -0.043893714, z: 0}
+--- !u!1 &1084642833
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1084642834}
+  m_Layer: 0
+  m_Name: containerEnemy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1084642834
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084642833}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.11715551, y: -0.29679397, z: -0.040301487}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1422212547}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1241336304 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6944115530669215200, guid: 878e2f24649f4504f9d87d691890129d, type: 3}
+  m_PrefabInstance: {fileID: 1991968729}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1422212545
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1422212547}
+  - component: {fileID: 1422212546}
+  m_Layer: 0
+  m_Name: Spawn_Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1422212546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1422212545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05cf27356f863d649abef595415d6c45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyPrefab: {fileID: 3453467341091687907, guid: c1753c2112c71a34c9e88c960f418d52, type: 3}
+  _container: {fileID: 1084642833}
+  _isSpawning: 0
+--- !u!4 &1422212547
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1422212545}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1084642834}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1584868561
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,11 +466,11 @@ GameObject:
   - component: {fileID: 1584868562}
   m_Layer: 0
   m_Name: BluePlane
-  m_TagString: Untagged
+  m_TagString: BluePlane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1584868562
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -447,9 +531,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b4163fd3f795ba47881ad89d254ad28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 2.5
+  _speed: 4
   _blueLaserPrefab: {fileID: 7803087468867390017, guid: a1444c85704271c4896d61e145cd1103, type: 3}
   _quadFiring: {fileID: 8089787730748786922, guid: 6f3d8980fc6195a4e955f4659f508195, type: 3}
+  _shieldVisual: {fileID: 1241336304}
   _lives: 3
 --- !u!212 &1584868565
 SpriteRenderer:
@@ -618,7 +703,7 @@ GameObject:
   - component: {fileID: 1902054038}
   m_Layer: 0
   m_Name: BlackPlane
-  m_TagString: Untagged
+  m_TagString: BlackPlane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -957,3 +1042,4 @@ SceneRoots:
   - {fileID: 409002412}
   - {fileID: 1902054037}
   - {fileID: 1782755782}
+  - {fileID: 1422212547}
