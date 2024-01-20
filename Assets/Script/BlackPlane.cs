@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BlackPlane : MonoBehaviour
@@ -7,7 +8,7 @@ public class BlackPlane : MonoBehaviour
     [SerializeField]
     private float _speed = 2.5f;
     [SerializeField]
-    private GameObject _laser;
+    private GameObject _laserPrefab;
     private float _firerate = 0.5f;
     private float _coolDown = -1.0f;
     [SerializeField]
@@ -25,9 +26,14 @@ public class BlackPlane : MonoBehaviour
         Movement();
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > _coolDown)
         {
-            Instantiate(_laser, transform.position + new Vector3(0.95f, -0.3f, 0), Quaternion.identity);
-            Instantiate(_laser, transform.position + new Vector3(-0.95f,-0.3f , 0), Quaternion.identity);
+            _coolDown = Time.time + _firerate;
+            Instantiate(_laserPrefab, transform.position + new Vector3(0.256f, 1.05f, 0), Quaternion.identity);
+            Instantiate(_laserPrefab, transform.position + new Vector3(-0.256f, 1.05f, 0), Quaternion.identity);
         }
+
+        // press Q blackhole
+        // press E mothership
+
     }
 
     void Movement()

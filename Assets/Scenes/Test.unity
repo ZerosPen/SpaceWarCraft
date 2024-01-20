@@ -236,7 +236,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &409002411
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -317,7 +317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 2.5
-  _laserPrefab: {fileID: 7400375355626459284, guid: a1714f5ffb8bf6f4b82f2f0d64d559a2, type: 3}
+  _laserPrefab: {fileID: 3158554901985692244, guid: a3b8a2cb32120cb40881155971e0c100, type: 3}
   _lives: 3
 --- !u!54 &409002414
 Rigidbody:
@@ -534,7 +534,11 @@ MonoBehaviour:
   _speed: 4
   _blueLaserPrefab: {fileID: 7803087468867390017, guid: a1444c85704271c4896d61e145cd1103, type: 3}
   _quadFiring: {fileID: 8089787730748786922, guid: 6f3d8980fc6195a4e955f4659f508195, type: 3}
+<<<<<<< HEAD
   _shieldVisual: {fileID: 1241336304}
+=======
+  _sheild: {fileID: 1991968731}
+>>>>>>> 67fa9c773894ef072990fd6d6d8896e8e7646bf9
   _lives: 3
 --- !u!212 &1584868565
 SpriteRenderer:
@@ -836,7 +840,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 2.5
-  _laser: {fileID: 7400375355626459284, guid: a1714f5ffb8bf6f4b82f2f0d64d559a2, type: 3}
+  _laserPrefab: {fileID: 7400375355626459284, guid: a1714f5ffb8bf6f4b82f2f0d64d559a2, type: 3}
   _lives: 3
 --- !u!1 &1907720201
 GameObject:
@@ -943,6 +947,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6944115530669215200, guid: 878e2f24649f4504f9d87d691890129d, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6944115530669215200, guid: 878e2f24649f4504f9d87d691890129d, type: 3}
       propertyPath: m_Name
       value: HexagonSheild
       objectReference: {fileID: 0}
@@ -1030,6 +1038,11 @@ PrefabInstance:
 --- !u!4 &1991968730 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8794889448740070452, guid: 878e2f24649f4504f9d87d691890129d, type: 3}
+  m_PrefabInstance: {fileID: 1991968729}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &1991968731 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 2707906473934328584, guid: 878e2f24649f4504f9d87d691890129d, type: 3}
   m_PrefabInstance: {fileID: 1991968729}
   m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
