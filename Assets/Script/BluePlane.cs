@@ -15,6 +15,9 @@ public class NewBehaviourScript : MonoBehaviour
     private float _firerate = 0.35f;
     private float _coolDown = 0.5f;
 
+    [SerializeField]
+    private SpriteRenderer _sheild;
+
     private bool _quadFiringAct = false;
     private bool _sheildAct = false;
 
@@ -91,7 +94,7 @@ public class NewBehaviourScript : MonoBehaviour
             _coolDown = Time.time + _firerate;
         if (_quadFiringAct == true)
         {
-            Instantiate(_quadFiring, transform.position, Quaternion.identity);
+            Instantiate(_quadFiring, transform.position + new Vector3(1.15f, 0.7f, 0), Quaternion.identity);
             if (transform.position.y > 8f)
             {
                 Destroy(_quadFiring);
@@ -107,14 +110,14 @@ public class NewBehaviourScript : MonoBehaviour
 
     public void shieldIsActiv()
     {
-        _sheildAct= true;
+        _sheildAct = true;
         StartCoroutine(SheildDownTime());
     }
 
     IEnumerator SheildDownTime()
     {
         yield return new WaitForSeconds(15.0f);
-        _sheildAct= false;
+        _sheildAct = false;
     }
 
     void QuadFiringAct()

@@ -27,9 +27,12 @@ public class GrayePlane : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > _cooldown)
         {
             _cooldown= Time.time + _firerate;
-            Instantiate(_laserPrefab, transform.position + new Vector3(0.5f , 0.01f, 0), Quaternion.identity);
-            Instantiate(_laserPrefab, transform.position + new Vector3(-0.5f, 0.01f, 0), Quaternion.identity);
+            Instantiate(_laserPrefab, transform.position + new Vector3(0f , 1.6f, 0), Quaternion.identity);
         }
+
+        // if E get press Laser beam
+        // if Q get press KamuiHeal
+
     }
 
     void Movemnet()
@@ -60,15 +63,16 @@ public class GrayePlane : MonoBehaviour
         {
             transform.position = new Vector3 (11.3f, transform.position.y, 0);
         }
-
-/*        public void Damage()
-        {
-            _lives--;
-
-            if (_lives < 1)
-            {
-                Destroy(this.gameObject);
-            }
-        }*/
     }
+
+    public void Damage()
+    {
+        _lives--;
+
+        if (_lives < 1)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
 }
