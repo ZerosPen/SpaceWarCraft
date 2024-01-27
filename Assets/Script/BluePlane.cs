@@ -111,7 +111,7 @@ public class NewBehaviourScript : MonoBehaviour
         }
     }
 
-<<<<<<< HEAD
+/*<<<<<<< HEAD
 =======
     public void shieldIsActiv()
     {
@@ -125,7 +125,7 @@ public class NewBehaviourScript : MonoBehaviour
         _sheildAct = false;
     }
 
->>>>>>> 67fa9c773894ef072990fd6d6d8896e8e7646bf9
+>>>>>>> 67fa9c773894ef072990fd6d6d8896e8e7646bf9*/
     void QuadFiringAct()
     {
         _quadFiringAct = true;
