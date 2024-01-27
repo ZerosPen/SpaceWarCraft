@@ -37,10 +37,8 @@ public class Enemy : MonoBehaviour
         transform.Translate(Vector3.down * _ramspeed * Time.deltaTime);
         if (transform.position.y < -5f)
         {
-            Destroy(this.gameObject);
-            
-            /*float randomX = Random.Range(-8, 8);
-            transform.position = new Vector3(randomX, 7, 0);*/
+            float randomX = Random.Range(-8, 8);
+            transform.position = new Vector3(randomX, 7, 0);
         }
     }
 
