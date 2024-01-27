@@ -37,8 +37,10 @@ public class Enemy : MonoBehaviour
         transform.Translate(Vector3.down * _ramspeed * Time.deltaTime);
         if (transform.position.y < -5f)
         {
-            float randomX = Random.Range(-8, 8);
-            transform.position = new Vector3(randomX, 7, 0);
+            Destroy(this.gameObject);
+            
+            /*float randomX = Random.Range(-8, 8);
+            transform.position = new Vector3(randomX, 7, 0);*/
         }
     }
 
@@ -79,7 +81,7 @@ public class Enemy : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        if (other.tag == "BlueLaser")
+/*        if (other.tag == "BlueLaser")
         {
             Destroy(other.gameObject);
             _HealtPoint = -2;
@@ -87,7 +89,7 @@ public class Enemy : MonoBehaviour
             {
                 Destroy(this.gameObject);
             }
-        }
+        }*/
 
     }
 }

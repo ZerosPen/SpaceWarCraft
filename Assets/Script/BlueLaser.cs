@@ -16,12 +16,21 @@ public class BlueLaser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        MoveUp();
+
+    }
+
+    void MoveUp()
+    {
         transform.Translate(Vector3.up * velocity * Time.deltaTime);
 
         if (transform.position.y > 8f)
         {
+            if (transform.parent != null)
+            {
+                Destroy(transform.parent.gameObject);
+            }
             Destroy(this.gameObject);
         }
-
     }
 }
