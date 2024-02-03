@@ -408,7 +408,7 @@ GameObject:
   - component: {fileID: 967790977}
   m_Layer: 0
   m_Name: BlackPlane
-  m_TagString: Untagged
+  m_TagString: BlackPlane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -672,7 +672,7 @@ GameObject:
   - component: {fileID: 1435241265}
   - component: {fileID: 1435241264}
   m_Layer: 0
-  m_Name: Blue_Plane
+  m_Name: BluePlane
   m_TagString: BluePlane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -841,7 +841,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05cf27356f863d649abef595415d6c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 3453467341091687907, guid: c1753c2112c71a34c9e88c960f418d52, type: 3}
+  enemys:
+  - {fileID: 2351306910406954158, guid: 335ec8240c733ee4cb3fb7ddfab34046, type: 3}
+  - {fileID: 2351306910406954158, guid: 335ec8240c733ee4cb3fb7ddfab34046, type: 3}
   _container: {fileID: 1223545148}
   _isSpawning: 0
 --- !u!4 &1531658697
@@ -875,7 +877,7 @@ GameObject:
   - component: {fileID: 1614828318}
   m_Layer: 0
   m_Name: GrayPlane
-  m_TagString: Untagged
+  m_TagString: GrayPlane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

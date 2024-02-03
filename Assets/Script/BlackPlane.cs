@@ -7,17 +7,25 @@ public class BlackPlane : MonoBehaviour
 {
     [SerializeField]
     private float _speed = 2.5f;
+
     [SerializeField]
     private GameObject _laserPrefab;
     private float _firerate = 0.5f;
     private float _coolDown = -1.0f;
+
     [SerializeField]
     private int _lives = 3;
+    private SpawnManager _spawnManager;
 
     // Start is called before the first frame update
     void Start()
     {
         transform.position = new Vector3(0, 0, 0);
+        _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        if (_spawnManager == null)
+        {
+            Debug.LogError("The Spawn Manager is NULL");
+        }
     }
 
     // Update is called once per frame
@@ -71,6 +79,7 @@ public class BlackPlane : MonoBehaviour
 
         if (_lives < 1)
         {
+            _spawnManager.OnPlayerDeath();
             Destroy(this.gameObject);
         }
     }

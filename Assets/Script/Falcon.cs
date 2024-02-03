@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Falcon : MonoBehaviour
 {
     [SerializeField]
     private float _ramspeed = 5.0f;
@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
     private int _HealtPoint = 10;
 
     [SerializeField]
-    private GameObject _redlaser;
+    private GameObject _bluelaser;
     private float _firerate = 3.0f;
     private float _canFire = -1f;
 
@@ -31,9 +31,8 @@ public class Enemy : MonoBehaviour
         {
             _canFire = Time.time + _firerate;
             _firerate = Random.Range(3f, 7f);
-            GameObject enemyLaser = Instantiate(_redlaser, transform.position, Quaternion.identity);
-            Redlaser[] lasers = enemyLaser.GetComponentsInChildren<Redlaser>();
-            
+            GameObject enemyBlueLaser = Instantiate(_bluelaser, transform.position, Quaternion.identity);
+            BlueLaser[] lasers = enemyBlueLaser.GetComponentsInChildren<BlueLaser>();
             for (int i = 0; i < lasers.Length; i++)
             {
                 lasers[i].AssignEnemyLaser();
@@ -75,7 +74,7 @@ public class Enemy : MonoBehaviour
 
         if (other.tag == "BlackPlane")
         {
-            BlackPlane player = other.GetComponent<BlackPlane>();  
+            BlackPlane player = other.GetComponent<BlackPlane>();
             {
                 player.Damage();
             }
@@ -87,16 +86,5 @@ public class Enemy : MonoBehaviour
             Destroy(other.gameObject);
             Destroy(this.gameObject);
         }
-
-/*        if (other.tag == "BlueLaser")
-        {
-            Destroy(other.gameObject);
-            _HealtPoint = -2;
-            if (_HealtPoint < 1)
-            {
-                Destroy(this.gameObject);
-            }
-        }*/
-
     }
 }
