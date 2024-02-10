@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7287961308026180580}
   m_Layer: 0
   m_Name: R-Enemy-1
-  m_TagString: Untagged
+  m_TagString: Enemy_1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,8 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ramspeed: 5
-  _HealtPoint: 10
-  _laser: {fileID: 637933588621959736, guid: 58b860ef868662d4bb7fdb4333d15c4a, type: 3}
+  _HealtPoint: 20
+  _redlaser: {fileID: 637933588621959736, guid: 58b860ef868662d4bb7fdb4333d15c4a, type: 3}
 --- !u!65 &8172294157102460817
 BoxCollider:
   m_ObjectHideFlags: 0

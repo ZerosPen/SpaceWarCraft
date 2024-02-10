@@ -2,39 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class EnemyMashle : MonoBehaviour
 {
     [SerializeField]
-    private float _ramspeed = 5.0f;
+    private float _speed = 3.5f;
+
+    private int _HP = 100;
 
     [SerializeField]
-    private int _HealtPoint = 10;
-
+    private GameObject _greenlaser;
     [SerializeField]
-    private GameObject _redlaser;
     private float _firerate = 3.0f;
+    [SerializeField]
     private float _canFire = -1f;
-
-    
-    
 
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        CalculateMove();
+        calculateMove();
         if (Time.time > _canFire)
         {
             _canFire = Time.time + _firerate;
             _firerate = Random.Range(3f, 7f);
-            GameObject enemyLaser = Instantiate(_redlaser, transform.position, Quaternion.identity);
-            Redlaser[] lasers = enemyLaser.GetComponentsInChildren<Redlaser>();
-            
+            GameObject enemyLaser = Instantiate(_greenlaser, transform.position, Quaternion.identity);
+            greenLaser[] lasers = enemyLaser.GetComponentsInChildren<greenLaser>();
+
             for (int i = 0; i < lasers.Length; i++)
             {
                 lasers[i].AssignEnemyLaser();
@@ -42,10 +40,10 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void CalculateMove()
+    void calculateMove()
     {
-        transform.Translate(Vector3.down * _ramspeed * Time.deltaTime);
-        if (transform.position.y < -5f)
+        transform.Translate(Vector3.down * _speed * Time.deltaTime);
+        if (transform.position.y < -8f)
         {
             float randomX = Random.Range(-8, 8);
             transform.position = new Vector3(randomX, 7, 0);
@@ -59,7 +57,7 @@ public class Enemy : MonoBehaviour
             NewBehaviourScript player = other.GetComponent<NewBehaviourScript>();
             if (player != null)
             {
-                player.Damage(10);
+                player.Damage(50);
                 Debug.Log("Your Crash By enemy_1!");
             }
             Destroy(this.gameObject);
@@ -77,7 +75,7 @@ public class Enemy : MonoBehaviour
 
         if (other.tag == "BlackPlane")
         {
-            BlackPlane player = other.GetComponent<BlackPlane>();  
+            BlackPlane player = other.GetComponent<BlackPlane>();
             {
                 player.Damage();
             }
@@ -85,11 +83,10 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void HitBlueLaser(int damaged)
+    public void HitBlueLaser(int damage)
     {
-        _HealtPoint -= damaged;
-        Debug.Log(_HealtPoint);
-        if (_HealtPoint < 1)
+        _HP -= damage;
+        if (_HP < 1)
         {
             Destroy(this.gameObject);
         }
@@ -97,19 +94,22 @@ public class Enemy : MonoBehaviour
 
     public void HitGreenLaser(int damaged)
     {
-        _HealtPoint-= damaged;
-        if (_HealtPoint < 1)
+        _HP -= damaged;
+        if (_HP
+            < 1)
         {
             Destroy(this.gameObject);
         }
     }
 
+
     public void HitRedLaser(int damage)
     {
-        _HealtPoint -= damage;
-        if (_HealtPoint < 1)
+        _HP -= damage;
+        if ( _HP < 1)
         {
             Destroy(this.gameObject);
         }
     }
+
 }

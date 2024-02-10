@@ -57,7 +57,8 @@ public class Falcon : MonoBehaviour
             NewBehaviourScript player = other.GetComponent<NewBehaviourScript>();
             if (player != null)
             {
-                player.Damage();
+                player.Damage(15);
+                Debug.Log("Your Crash By Falcon!");
             }
             Destroy(this.gameObject);
         }
@@ -84,6 +85,33 @@ public class Falcon : MonoBehaviour
         if (other.tag == "RedLaser")
         {
             Destroy(other.gameObject);
+            Destroy(this.gameObject);
+        }
+    }
+    public void HitBlueLaser(int damaged)
+    {
+        _HealtPoint -= damaged;
+        Debug.Log(_HealtPoint);
+        if (_HealtPoint < 1)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    public void HitGreenLaser(int damaged)
+    {
+        _HealtPoint -= damaged;
+        if (_HealtPoint < 1)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    public void HitRedLaser(int damage)
+    {
+        _HealtPoint -= damage;
+        if (_HealtPoint < 1)
+        {
             Destroy(this.gameObject);
         }
     }

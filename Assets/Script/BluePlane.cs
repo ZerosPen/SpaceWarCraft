@@ -12,8 +12,10 @@ public class NewBehaviourScript : MonoBehaviour
     private GameObject _blueLaserPrefab;
     [SerializeField]
     private GameObject _quadFiring;
+    [SerializeField]
     private float _firerate = 0.35f;
-    private float _coolDown = 0.5f;
+    [SerializeField]
+    private float _coolDown = 0.05f;
 
     [SerializeField]
     private SpriteRenderer _sheild;
@@ -111,21 +113,6 @@ public class NewBehaviourScript : MonoBehaviour
         }
     }
 
-/*<<<<<<< HEAD
-=======
-    public void shieldIsActiv()
-    {
-        _sheildAct = true;
-        StartCoroutine(SheildDownTime());
-    }
-
-    IEnumerator SheildDownTime()
-    {
-        yield return new WaitForSeconds(15.0f);
-        _sheildAct = false;
-    }
-
->>>>>>> 67fa9c773894ef072990fd6d6d8896e8e7646bf9*/
     void QuadFiringAct()
     {
         _quadFiringAct = true;
@@ -150,10 +137,20 @@ public class NewBehaviourScript : MonoBehaviour
     }
 
 
-    public void Damage()
+    public void Damage(int crash)
     {
-        _lives--;
+        _lives -= crash;
 
+        if (_lives < 1)
+        {
+            _spawnManager.OnPlayerDeath();
+            Destroy(this.gameObject);
+        }
+    }
+
+    public void DamageLaser(int hit)
+    {
+        _lives -= hit;
         if (_lives < 1)
         {
             _spawnManager.OnPlayerDeath();

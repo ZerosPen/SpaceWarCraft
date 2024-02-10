@@ -68,6 +68,7 @@ public class Redlaser : MonoBehaviour
             if (player != null)
             {
                 player.Damage();
+                Destroy(this.gameObject);
             }
         }
 
@@ -77,6 +78,7 @@ public class Redlaser : MonoBehaviour
             if (player != null )
             {
                 player.Damage();
+                Destroy(this.gameObject);
             }
         }
 
@@ -85,7 +87,38 @@ public class Redlaser : MonoBehaviour
             NewBehaviourScript player = other.GetComponent<NewBehaviourScript>();
             if (player != null )
             {
-                player.Damage();
+                player.DamageLaser(10);
+                Destroy(this.gameObject);
+            }
+        }
+
+        if (other.tag == "Enemy_1" && _isEnemyLaser == false)
+        {
+            Enemy enemy = other.GetComponent<Enemy>();
+            if (enemy != null )
+            {
+                enemy.HitRedLaser(50);
+                Destroy(this.gameObject);
+            }
+        }
+        
+        if (other.tag == "Falcon" && _isEnemyLaser == false)
+        {
+            Falcon falcon = other.GetComponent<Falcon>();
+            if (falcon != null)
+            {
+                falcon.HitRedLaser(50);
+                Destroy(this.gameObject);
+            }
+        }
+
+        if (other.tag == "Mashle" && _isEnemyLaser == false)
+        {
+            EnemyMashle Mashle = other.GetComponent<EnemyMashle>();
+            if (Mashle != null)
+            {
+                Mashle.HitRedLaser(50);
+                Destroy(this.gameObject);
             }
         }
     }

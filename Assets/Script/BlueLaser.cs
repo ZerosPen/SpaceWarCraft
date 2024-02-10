@@ -69,6 +69,7 @@ public class BlueLaser : MonoBehaviour
             {
                 player.Damage();
             }
+            Destroy(this.gameObject);
         }
 
         if (other.tag == "GrayPlane" && EnemyLaser == true)
@@ -78,6 +79,7 @@ public class BlueLaser : MonoBehaviour
             {
                 player.Damage();
             }
+            Destroy(this.gameObject);
         }
 
         if (other.tag == "BluePlane" && EnemyLaser == true)
@@ -85,8 +87,40 @@ public class BlueLaser : MonoBehaviour
             NewBehaviourScript player = other.GetComponent<NewBehaviourScript>();
             if (player != null)
             {
-                player.Damage();
+                player.DamageLaser(5);
+            }
+            Destroy(this.gameObject);
+        }
+
+        if (other.tag == "Enemy_1" && EnemyLaser == false)
+        {
+            Enemy enemy = other.GetComponent<Enemy>();
+            if (enemy !=null)
+            {
+                enemy.HitBlueLaser(10);
+            }
+            Destroy(this.gameObject);
+        }
+
+        if (other.tag == "Falcon" && EnemyLaser == false)
+        {
+            Falcon falcon = other.GetComponent<Falcon>();
+            if (falcon != null)
+            {
+                falcon.HitBlueLaser(10);
+            }
+            Destroy(this.gameObject);
+        }
+
+        if (other.tag == "Mashle" && EnemyLaser == false)
+        {
+            EnemyMashle Mashle = other.GetComponent<EnemyMashle>();
+            if (Mashle != null)
+            {
+                Mashle.HitBlueLaser(10);
+                Destroy(this.gameObject);
             }
         }
+
     }
 }
