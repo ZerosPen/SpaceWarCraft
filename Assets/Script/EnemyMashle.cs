@@ -26,18 +26,12 @@ public class EnemyMashle : MonoBehaviour
     void Update()
     {
         calculateMove();
-        if (Time.time > _canFire)
+        /*if (Time.time > _canFire)
         {
             _canFire = Time.time + _firerate;
             _firerate = Random.Range(3f, 7f);
-            GameObject enemyLaser = Instantiate(_greenlaser, transform.position, Quaternion.identity);
-            greenLaser[] lasers = enemyLaser.GetComponentsInChildren<greenLaser>();
-
-            for (int i = 0; i < lasers.Length; i++)
-            {
-                lasers[i].AssignEnemyLaser();
-            }
-        }
+            GameObject enemyGreenLaser = Instantiate(_greenlaser, transform.postion);
+        }*/
     }
 
     void calculateMove()
