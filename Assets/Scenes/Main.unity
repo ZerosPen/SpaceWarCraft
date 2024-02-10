@@ -809,9 +809,11 @@ MonoBehaviour:
   _speed: 2.5
   _blueLaserPrefab: {fileID: 7803087468867390017, guid: a1444c85704271c4896d61e145cd1103, type: 3}
   _quadFiring: {fileID: 8089787730748786922, guid: 6f3d8980fc6195a4e955f4659f508195, type: 3}
+  _firerate: 0.15
+  _coolDown: 0.1
   _sheild: {fileID: 0}
   _shieldVisual: {fileID: 616389116}
-  _lives: 3
+  _lives: 20
 --- !u!1 &1531658695
 GameObject:
   m_ObjectHideFlags: 0
@@ -841,10 +843,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05cf27356f863d649abef595415d6c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemys:
-  - {fileID: 2351306910406954158, guid: 335ec8240c733ee4cb3fb7ddfab34046, type: 3}
-  - {fileID: 2351306910406954158, guid: 335ec8240c733ee4cb3fb7ddfab34046, type: 3}
   _container: {fileID: 1223545148}
+  enemys:
+  - {fileID: 3453467341091687907, guid: c1753c2112c71a34c9e88c960f418d52, type: 3}
+  - {fileID: 2351306910406954158, guid: 335ec8240c733ee4cb3fb7ddfab34046, type: 3}
+  - {fileID: 8562567203341072523, guid: 18c7b05d09f64b849a35f04b2540d07a, type: 3}
   _isSpawning: 0
 --- !u!4 &1531658697
 Transform:

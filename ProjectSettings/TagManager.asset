@@ -8,6 +8,9 @@ TagManager:
   - BlackPlane
   - GrayPlane
   - BlueLaser
+  - Enemy_1
+  - Falcon
+  - Mashle
   layers:
   - Default
   - TransparentFX
