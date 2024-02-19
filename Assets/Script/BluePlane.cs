@@ -27,10 +27,12 @@ public class NewBehaviourScript : MonoBehaviour
     private SpawnManager _spawnManager;
     private float _SheildCoolDown = 3.5f;
 
-
     [SerializeField]
     private int _lives = 3;
-   
+
+    [SerializeField]
+    private int _score;
+
 
     // Start is called before the first frame update
     void Start()
@@ -158,4 +160,8 @@ public class NewBehaviourScript : MonoBehaviour
         }
     }
 
+    public void AddScorePlayer(int point)
+    {
+        _score += point;
+    }
 }

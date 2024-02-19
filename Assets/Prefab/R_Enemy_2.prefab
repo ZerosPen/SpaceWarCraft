@@ -147,6 +147,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5b848dfc0885cf4aa7d439c0b3ca435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ramspeed: 5
+  _ramspeed: 2
   _HealtPoint: 5
   _bluelaser: {fileID: 3375967638456138648, guid: d52ae55cca7cce342931c93e7beb3f20, type: 3}

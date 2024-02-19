@@ -8,10 +8,12 @@ public class Redlaser : MonoBehaviour
     private float velocity = 4f; 
     private bool _isEnemyLaser = false;
 
+    private NewBehaviourScript BluePlane;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        BluePlane= GetComponent<NewBehaviourScript>();
     }
 
     // Update is called once per frame
@@ -98,6 +100,10 @@ public class Redlaser : MonoBehaviour
             if (enemy != null )
             {
                 enemy.HitRedLaser(50);
+                if (BluePlane != null)
+                {
+                    BluePlane.AddScorePlayer(10);
+                }
                 Destroy(this.gameObject);
             }
         }
@@ -108,6 +114,10 @@ public class Redlaser : MonoBehaviour
             if (falcon != null)
             {
                 falcon.HitRedLaser(50);
+                if (BluePlane != null)
+                {
+                    BluePlane.AddScorePlayer(10);
+                }
                 Destroy(this.gameObject);
             }
         }
@@ -118,6 +128,10 @@ public class Redlaser : MonoBehaviour
             if (Mashle != null)
             {
                 Mashle.HitRedLaser(50);
+                if (BluePlane != null)
+                {
+                    BluePlane.AddScorePlayer(10);
+                }
                 Destroy(this.gameObject);
             }
         }

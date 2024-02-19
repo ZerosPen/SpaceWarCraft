@@ -8,6 +8,8 @@ public class BlueLaser : MonoBehaviour
     private float velocity = 5f;
     private bool EnemyLaser = false;
 
+    private NewBehaviourScript BluePlane;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -108,6 +110,10 @@ public class BlueLaser : MonoBehaviour
             if (falcon != null)
             {
                 falcon.HitBlueLaser(10);
+                if (BluePlane != null)
+                {
+                    BluePlane.AddScorePlayer(10);
+                }
             }
             Destroy(this.gameObject);
         }
@@ -118,8 +124,12 @@ public class BlueLaser : MonoBehaviour
             if (Mashle != null)
             {
                 Mashle.HitBlueLaser(10);
-                Destroy(this.gameObject);
+                if (BluePlane != null)
+                {
+                    BluePlane.AddScorePlayer(10);
+                }
             }
+            Destroy(this.gameObject);
         }
 
     }

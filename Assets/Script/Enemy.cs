@@ -15,13 +15,13 @@ public class Enemy : MonoBehaviour
     private float _firerate = 3.0f;
     private float _canFire = -1f;
 
-    
+    private NewBehaviourScript BluePlane;
     
 
     // Start is called before the first frame update
     void Start()
     {
-
+        BluePlane = GetComponent<NewBehaviourScript>();
     }
 
     // Update is called once per frame
@@ -61,8 +61,8 @@ public class Enemy : MonoBehaviour
             {
                 player.Damage(10);
                 Debug.Log("Your Crash By enemy_1!");
+                Destroy(this.gameObject);
             }
-            Destroy(this.gameObject);
         }
 
         if (other.tag == "GrayPlane")
@@ -88,9 +88,12 @@ public class Enemy : MonoBehaviour
     public void HitBlueLaser(int damaged)
     {
         _HealtPoint -= damaged;
-        Debug.Log(_HealtPoint);
         if (_HealtPoint < 1)
         {
+            if (BluePlane != null)
+            {
+                BluePlane.AddScorePlayer(10);
+            }
             Destroy(this.gameObject);
         }
     }
@@ -109,6 +112,10 @@ public class Enemy : MonoBehaviour
         _HealtPoint -= damage;
         if (_HealtPoint < 1)
         {
+            if (BluePlane != null)
+            {
+                BluePlane.AddScorePlayer(10);
+            }
             Destroy(this.gameObject);
         }
     }

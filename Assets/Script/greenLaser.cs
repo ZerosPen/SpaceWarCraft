@@ -8,10 +8,13 @@ public class greenLaser : MonoBehaviour
     private float velocity = 5.5f;
     private bool _EnemyLaser = false;
 
+    private NewBehaviourScript BluePlane;
+
+
     // Start is called before the first frame update
     void Start()
     {
-
+        BluePlane = GetComponent<NewBehaviourScript>();
     }
 
     // Update is called once per frame
@@ -99,6 +102,7 @@ public class greenLaser : MonoBehaviour
             if (enemy != null)
             {
                 enemy.HitGreenLaser(25);
+
             }
             Destroy(this.gameObject);
         }

@@ -15,12 +15,12 @@ public class Falcon : MonoBehaviour
     private float _firerate = 3.0f;
     private float _canFire = -1f;
 
-
+    private NewBehaviourScript BluePlane;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        BluePlane = GetComponent<NewBehaviourScript>();
     }
 
     // Update is called once per frame
@@ -91,9 +91,13 @@ public class Falcon : MonoBehaviour
     public void HitBlueLaser(int damaged)
     {
         _HealtPoint -= damaged;
-        Debug.Log(_HealtPoint);
         if (_HealtPoint < 1)
         {
+            if (BluePlane != null)
+            {
+                BluePlane.AddScorePlayer(10);
+            }
+
             Destroy(this.gameObject);
         }
     }
@@ -112,6 +116,10 @@ public class Falcon : MonoBehaviour
         _HealtPoint -= damage;
         if (_HealtPoint < 1)
         {
+            if (BluePlane != null)
+            {
+                BluePlane.AddScorePlayer(10);
+            }
             Destroy(this.gameObject);
         }
     }

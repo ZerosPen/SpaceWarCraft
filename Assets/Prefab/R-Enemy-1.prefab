@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b612e5b49d1ff84581d9e4fc1207c8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ramspeed: 5
+  _ramspeed: 2
   _HealtPoint: 20
   _redlaser: {fileID: 637933588621959736, guid: 58b860ef868662d4bb7fdb4333d15c4a, type: 3}
 --- !u!65 &8172294157102460817

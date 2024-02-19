@@ -14,12 +14,19 @@ public class EnemyMashle : MonoBehaviour
     [SerializeField]
     private float _firerate = 3.0f;
     [SerializeField]
-    private float _canFire = -1f;
+    private float _canFire = 1f;
+
+    private NewBehaviourScript BluePlane;
+    private BlackPlane BlackPlane;
+    private GrayePlane GrayPlane;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        BluePlane = GetComponent<NewBehaviourScript>();
+        BlackPlane = GetComponent<BlackPlane>();
+        GrayPlane = GetComponent<GrayePlane>();
     }
 
     // Update is called once per frame
@@ -51,7 +58,7 @@ public class EnemyMashle : MonoBehaviour
             NewBehaviourScript player = other.GetComponent<NewBehaviourScript>();
             if (player != null)
             {
-                player.Damage(50);
+                player.Damage(10);
                 Debug.Log("Your Crash By enemy_1!");
             }
             Destroy(this.gameObject);
@@ -82,6 +89,10 @@ public class EnemyMashle : MonoBehaviour
         _HP -= damage;
         if (_HP < 1)
         {
+            if (BluePlane != null)
+            {
+                BluePlane.AddScorePlayer(10);
+            }
             Destroy(this.gameObject);
         }
     }
@@ -89,8 +100,7 @@ public class EnemyMashle : MonoBehaviour
     public void HitGreenLaser(int damaged)
     {
         _HP -= damaged;
-        if (_HP
-            < 1)
+        if (_HP < 1)
         {
             Destroy(this.gameObject);
         }
@@ -102,6 +112,10 @@ public class EnemyMashle : MonoBehaviour
         _HP -= damage;
         if ( _HP < 1)
         {
+            if (BluePlane != null)
+            {
+                BluePlane.AddScorePlayer(10);
+            }
             Destroy(this.gameObject);
         }
     }

@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62513990467d5a141abeb48bdab29c0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 3.5
+  _speed: 2
   _greenlaser: {fileID: 8313488162866296811, guid: b6f9b72fede80bb4bb13f7f64e6122b1, type: 3}
   _firerate: 3
-  _canFire: -1
+  _canFire: 1
