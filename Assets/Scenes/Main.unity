@@ -1174,7 +1174,7 @@ MonoBehaviour:
   _sheild: {fileID: 0}
   _shieldVisual: {fileID: 616389116}
   _lives: 20
-  _score: 0
+  score: 0
 --- !u!1 &1531658695
 GameObject:
   m_ObjectHideFlags: 0
