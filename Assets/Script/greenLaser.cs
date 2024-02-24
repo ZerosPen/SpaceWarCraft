@@ -119,10 +119,10 @@ public class greenLaser : MonoBehaviour
 
         if (other.tag == "Mashle" && _EnemyLaser!= false)
         {
-            EnemyMashle MAshle = other.GetComponent<EnemyMashle>();
-            if (MAshle != null)
+            EnemyMashle Mashle = other.GetComponent<EnemyMashle>();
+            if (Mashle != null)
             {
-                MAshle.HitGreenLaser(25);
+                Mashle.HitGreenLaser(25);
                 Destroy(this.gameObject);
             }
         }

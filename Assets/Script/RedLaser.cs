@@ -100,11 +100,8 @@ public class Redlaser : MonoBehaviour
             if (enemy != null )
             {
                 enemy.HitRedLaser(50);
-                if (BluePlane != null)
-                {
-                    BluePlane.AddScorePlayer(10);
-                }
                 Destroy(this.gameObject);
+                
             }
         }
         
@@ -114,11 +111,8 @@ public class Redlaser : MonoBehaviour
             if (falcon != null)
             {
                 falcon.HitRedLaser(50);
-                if (BluePlane != null)
-                {
-                    BluePlane.AddScorePlayer(10);
-                }
                 Destroy(this.gameObject);
+                
             }
         }
 
@@ -128,11 +122,8 @@ public class Redlaser : MonoBehaviour
             if (Mashle != null)
             {
                 Mashle.HitRedLaser(50);
-                if (BluePlane != null)
-                {
-                    BluePlane.AddScorePlayer(10);
-                }
                 Destroy(this.gameObject);
+                
             }
         }
     }

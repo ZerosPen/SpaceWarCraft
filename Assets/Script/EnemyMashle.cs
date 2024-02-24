@@ -15,6 +15,7 @@ public class EnemyMashle : MonoBehaviour
     private float _firerate = 3.0f;
     [SerializeField]
     private float _canFire = 1f;
+    private int _scorepoint = 10;
 
     private NewBehaviourScript BluePlane;
     private BlackPlane BlackPlane;
@@ -88,12 +89,12 @@ public class EnemyMashle : MonoBehaviour
     {
         _HP -= damage;
         if (_HP < 1)
-        {
+        { 
+            Destroy(this.gameObject);
             if (BluePlane != null)
             {
                 BluePlane.AddScorePlayer(10);
             }
-            Destroy(this.gameObject);
         }
     }
 
@@ -103,21 +104,26 @@ public class EnemyMashle : MonoBehaviour
         if (_HP < 1)
         {
             Destroy(this.gameObject);
+            if (BluePlane != null)
+            {
+                BluePlane.AddScorePlayer(10);
+            }
         }
     }
-
 
     public void HitRedLaser(int damage)
     {
         _HP -= damage;
         if ( _HP < 1)
         {
-            if (BluePlane != null)
-            {
-                BluePlane.AddScorePlayer(10);
-            }
             Destroy(this.gameObject);
         }
     }
-
+    public void OnDestroy()
+    {
+        if (BluePlane != null)
+        {
+            BluePlane.AddScorePlayer(_scorepoint);
+        }
+    }
 }

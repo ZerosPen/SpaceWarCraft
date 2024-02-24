@@ -102,6 +102,7 @@ public class BlueLaser : MonoBehaviour
                 enemy.HitBlueLaser(10);
             }
             Destroy(this.gameObject);
+            
         }
 
         if (other.tag == "Falcon" && EnemyLaser == false)
@@ -110,12 +111,9 @@ public class BlueLaser : MonoBehaviour
             if (falcon != null)
             {
                 falcon.HitBlueLaser(10);
-                if (BluePlane != null)
-                {
-                    BluePlane.AddScorePlayer(10);
-                }
             }
             Destroy(this.gameObject);
+            
         }
 
         if (other.tag == "Mashle" && EnemyLaser == false)
@@ -124,12 +122,9 @@ public class BlueLaser : MonoBehaviour
             if (Mashle != null)
             {
                 Mashle.HitBlueLaser(10);
-                if (BluePlane != null)
-                {
-                    BluePlane.AddScorePlayer(10);
-                }
             }
             Destroy(this.gameObject);
+            
         }
 
     }

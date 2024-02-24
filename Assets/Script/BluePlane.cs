@@ -25,13 +25,16 @@ public class NewBehaviourScript : MonoBehaviour
     private GameObject _shieldVisual;
 
     private SpawnManager _spawnManager;
+    private Enemy _enemy;
+    private Falcon falcon;
+    private EnemyMashle mashle;
     private float _SheildCoolDown = 3.5f;
 
     [SerializeField]
     private int _lives = 3;
 
     [SerializeField]
-    private int _score;
+    private int score;
 
 
     // Start is called before the first frame update
@@ -160,8 +163,8 @@ public class NewBehaviourScript : MonoBehaviour
         }
     }
 
-    public void AddScorePlayer(int point)
+    public void AddScorePlayer(int points)
     {
-        _score += point;
+        score += points;
     }
 }

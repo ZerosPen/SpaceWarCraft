@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
     private GameObject _redlaser;
     private float _firerate = 3.0f;
     private float _canFire = -1f;
+    private int _scorepoint = 10;
 
     private NewBehaviourScript BluePlane;
     
@@ -90,11 +91,11 @@ public class Enemy : MonoBehaviour
         _HealtPoint -= damaged;
         if (_HealtPoint < 1)
         {
+            Destroy(this.gameObject);
             if (BluePlane != null)
             {
                 BluePlane.AddScorePlayer(10);
             }
-            Destroy(this.gameObject);
         }
     }
 
@@ -112,11 +113,15 @@ public class Enemy : MonoBehaviour
         _HealtPoint -= damage;
         if (_HealtPoint < 1)
         {
-            if (BluePlane != null)
-            {
-                BluePlane.AddScorePlayer(10);
-            }
             Destroy(this.gameObject);
+        }
+    }
+
+    public void OnDestroy()
+    {
+        if (BluePlane != null)
+        {
+            BluePlane.AddScorePlayer(_scorepoint);
         }
     }
 }
