@@ -16,6 +16,10 @@ public class GrayePlane : MonoBehaviour
     [SerializeField]
     private int _lives = 3;
     private SpawnManager _spawnManager;
+    private UIManager uiManager;
+
+    [SerializeField]
+    private int score;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +29,11 @@ public class GrayePlane : MonoBehaviour
         if (_spawnManager == null)
         {
             Debug.LogError("The Spawn Manager is NULL");
+        }
+        uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+        if (uiManager == null)
+        {
+            Debug.LogError("The UI Manager is NULL");
         }
     }
 
@@ -72,9 +81,19 @@ public class GrayePlane : MonoBehaviour
             transform.position = new Vector3(11.3f, transform.position.y, 0);
         }
     }
-    public void Damage()
+    public void Damagelaser(int hit)
     {
-        _lives--;
+        _lives -= hit;
+        if (_lives < 1)
+        {
+            _spawnManager.OnPlayerDeath();
+            Destroy(this.gameObject);
+        }
+    }
+
+    public void CrashDamage(int crash)
+    {
+        _lives -= crash;
 
         if (_lives < 1)
         {
@@ -82,6 +101,13 @@ public class GrayePlane : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    public void AddScorePlayer(int points)
+    {
+        score += points;
+        uiManager.UpdateScore(score);
+    }
+
 }
 
 

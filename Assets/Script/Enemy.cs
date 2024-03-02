@@ -17,12 +17,27 @@ public class Enemy : MonoBehaviour
     private int _scorepoint = 10;
 
     private NewBehaviourScript BluePlane;
-    
+    private BlackPlane BlackPlane;
+    private GrayePlane GrayPlane;
 
     // Start is called before the first frame update
     void Start()
     {
-        BluePlane = GetComponent<NewBehaviourScript>();
+        GameObject bluePlaneObject = GameObject.Find("BluePlane");
+        if (bluePlaneObject != null)
+        {
+            BluePlane = bluePlaneObject.GetComponent<NewBehaviourScript>();
+        }
+        GameObject blackPlaneObject = GameObject.Find("BlackPlane");
+        if (blackPlaneObject != null)
+        {
+            BlackPlane = blackPlaneObject.GetComponent<BlackPlane>();
+        }
+        GameObject grayPlaneObject = GameObject.Find("GrayPlane");
+        if (grayPlaneObject != null)
+        {
+            GrayPlane = grayPlaneObject.GetComponent<GrayePlane>();
+        }
     }
 
     // Update is called once per frame
@@ -71,7 +86,7 @@ public class Enemy : MonoBehaviour
             GrayePlane player = other.GetComponent<GrayePlane>();
             if (player != null)
             {
-                player.Damage();
+                player.CrashDamage(10);
             }
             Destroy(this.gameObject);
         }
@@ -80,7 +95,7 @@ public class Enemy : MonoBehaviour
         {
             BlackPlane player = other.GetComponent<BlackPlane>();  
             {
-                player.Damage();
+                player.CrashDamage(10);
             }
             Destroy(this.gameObject);
         }
@@ -122,6 +137,14 @@ public class Enemy : MonoBehaviour
         if (BluePlane != null)
         {
             BluePlane.AddScorePlayer(_scorepoint);
+        }
+        if (BlackPlane != null)
+        {
+            BlackPlane.AddScorePlayer(_scorepoint);
+        }
+        if (GrayPlane != null)
+        {
+            GrayPlane.AddScorePlayer(_scorepoint);
         }
     }
 }

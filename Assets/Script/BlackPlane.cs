@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class BlackPlane : MonoBehaviour
 {
@@ -16,15 +17,24 @@ public class BlackPlane : MonoBehaviour
     [SerializeField]
     private int _lives = 3;
     private SpawnManager _spawnManager;
+    private UIManager uiManager;
+
+    [SerializeField]
+    private int score;
 
     // Start is called before the first frame update
     void Start()
     {
         transform.position = new Vector3(0, 0, 0);
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         if (_spawnManager == null)
         {
             Debug.LogError("The Spawn Manager is NULL");
+        }
+        if (uiManager == null)
+        {
+            Debug.LogError("The UI Manager is NULL");
         }
     }
 
@@ -73,15 +83,32 @@ public class BlackPlane : MonoBehaviour
         }
     }
 
-    public void Damage()
+    public void LaserDamage(int hit)
     {
-        _lives--;
+        _lives -= hit;
+        if (_lives < 1)
+        {
+            _spawnManager.OnPlayerDeath();
+            Destroy(this.gameObject);
+        }
+    }
+
+    public void CrashDamage(int crash)
+    {
+        _lives -= crash;
 
         if (_lives < 1)
         {
             _spawnManager.OnPlayerDeath();
             Destroy(this.gameObject);
         }
+    }
+
+
+    public void AddScorePlayer(int points)
+    {
+        score += points;
+        uiManager.UpdateScore(score);
     }
 
 }

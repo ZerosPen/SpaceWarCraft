@@ -69,7 +69,7 @@ public class BlueLaser : MonoBehaviour
             BlackPlane player = other.GetComponent<BlackPlane>();
             if (player != null)
             {
-                player.Damage();
+                player.LaserDamage(5);
             }
             Destroy(this.gameObject);
         }
@@ -79,7 +79,7 @@ public class BlueLaser : MonoBehaviour
             GrayePlane player = other.GetComponent<GrayePlane>();
             if (player != null)
             {
-                player.Damage();
+                player.Damagelaser(5);
             }
             Destroy(this.gameObject);
         }

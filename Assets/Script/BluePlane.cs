@@ -28,6 +28,7 @@ public class NewBehaviourScript : MonoBehaviour
     private Enemy _enemy;
     private Falcon falcon;
     private EnemyMashle mashle;
+    private UIManager uiManager;
     private float _SheildCoolDown = 3.5f;
 
     [SerializeField]
@@ -45,6 +46,11 @@ public class NewBehaviourScript : MonoBehaviour
         if (_spawnManager == null)
         {
             Debug.LogError("The Spawn Manager is NULL");
+        }
+        uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+        if (uiManager == null)
+        {
+            Debug.LogError("The UI Manager is NULL");
         }
     }
 
@@ -166,5 +172,6 @@ public class NewBehaviourScript : MonoBehaviour
     public void AddScorePlayer(int points)
     {
         score += points;
+        uiManager.UpdateScore(score);
     }
 }
