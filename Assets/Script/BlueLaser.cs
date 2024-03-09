@@ -7,6 +7,7 @@ public class BlueLaser : MonoBehaviour
     [SerializeField]
     private float velocity = 5f;
     private bool EnemyLaser = false;
+    private bool BossMode = false;
 
     private NewBehaviourScript BluePlane;
 
@@ -20,6 +21,10 @@ public class BlueLaser : MonoBehaviour
     void Update()
     {
         if (EnemyLaser == false)
+        {
+            MoveUp();
+        }
+        if (BossMode == false)
         {
             MoveUp();
         }
@@ -123,8 +128,7 @@ public class BlueLaser : MonoBehaviour
             {
                 Mashle.HitBlueLaser(10);
             }
-            Destroy(this.gameObject);
-            
+            Destroy(this.gameObject);  
         }
 
     }
