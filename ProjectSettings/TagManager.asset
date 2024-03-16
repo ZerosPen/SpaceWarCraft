@@ -11,6 +11,7 @@ TagManager:
   - Enemy_1
   - Falcon
   - Mashle
+  - Bosslvl
   layers:
   - Default
   - TransparentFX

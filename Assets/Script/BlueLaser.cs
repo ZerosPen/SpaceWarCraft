@@ -10,11 +10,29 @@ public class BlueLaser : MonoBehaviour
     private bool BossMode = false;
 
     private NewBehaviourScript BluePlane;
+    private BlackPlane blackPlane;
+    private GrayePlane GrayPlane;
+    private EnemyBoss BossPlane;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        GameObject bluePlaneObject = GameObject.Find("BluePlane");
+        if (bluePlaneObject != null)
+        {
+            BluePlane = bluePlaneObject.GetComponent<NewBehaviourScript>();
+        }
+        GameObject blackPlaneObject = GameObject.Find("BlackPlane");
+        if (blackPlaneObject != null)
+        {
+            blackPlane = blackPlaneObject.GetComponent<BlackPlane>();
+        }
+        GameObject grayPlaneObject = GameObject.Find("GrayPlane");
+        if (grayPlaneObject != null)
+        {
+            GrayPlane = grayPlaneObject.GetComponent<GrayePlane>();
+        }
     }
 
     // Update is called once per frame
@@ -131,5 +149,14 @@ public class BlueLaser : MonoBehaviour
             Destroy(this.gameObject);  
         }
 
+        if (other.tag == "Bosslvl" && EnemyLaser == false)
+        {
+            EnemyBoss Bosslvl = other.GetComponent<EnemyBoss>();
+            if (Bosslvl != null)
+            {
+                Bosslvl.HitBlueLaser(5);
+                Destroy(this.gameObject);
+            }
+        }
     }
 }

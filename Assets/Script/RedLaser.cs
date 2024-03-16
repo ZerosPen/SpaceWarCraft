@@ -9,11 +9,17 @@ public class Redlaser : MonoBehaviour
     private bool _isEnemyLaser = false;
 
     private NewBehaviourScript BluePlane;
+    private BlackPlane blackPlane;
+    private GrayePlane GrayPlane;
+    private EnemyBoss BossPlane;
+    private Enemy Enemy_1;
+    private EnemyMashle Mashle;
+    private Falcon enemyFalcon;
 
     // Start is called before the first frame update
     void Start()
     {
-        BluePlane= GetComponent<NewBehaviourScript>();
+
     }
 
     // Update is called once per frame
@@ -124,6 +130,16 @@ public class Redlaser : MonoBehaviour
                 Mashle.HitRedLaser(50);
                 Destroy(this.gameObject);
                 
+            }
+        }
+
+        if (other.tag == "Bosslvl" && _isEnemyLaser == false)
+        {
+            EnemyBoss Bosslvl = other.GetComponent<EnemyBoss>();
+            if (Bosslvl != null)
+            {
+                Bosslvl.HitRedLaser(5);
+                Destroy(this.gameObject);
             }
         }
     }

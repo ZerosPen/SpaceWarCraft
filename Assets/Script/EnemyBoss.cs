@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyBoss : MonoBehaviour
 {
@@ -11,23 +12,30 @@ public class EnemyBoss : MonoBehaviour
     private float Movement = 5.0f;
     [SerializeField]
     private float StraveSpeed = 0.5f;
+    private NavMeshAgent BossPlane;
 
     [SerializeField]
-    private GameObject ModeAttack_1;
-    [SerializeField]
-    private GameObject ModeAttack_2;
-    [SerializeField] 
-    private GameObject ModeAttack_3;
+    private List<GameObject> ModeAttack;
+
     private float fireRate = 3.0f;
     private float canFire = -1f;
 
     private NewBehaviourScript BluePlane;
     private BlackPlane blackPlane;
     private GrayePlane GrayPlane;
+    private BlueLaser Blaser;
+    private greenLaser Glaser;
+    private Redlaser Rlaser;
+   
     [SerializeField]
     private bool BossStart = false;
+    [SerializeField]
     private bool StraveBoss = false;
-    private float WayPoint_A = -5;
+
+    [SerializeField]
+    private Transform pointA, pointB, pointC;
+    private Vector3 currentTarget;
+    
 
 
     // Start is called before the first frame update
@@ -48,24 +56,139 @@ public class EnemyBoss : MonoBehaviour
         {
             GrayPlane = grayPlaneObject.GetComponent<GrayePlane>();
         }
+        GameObject bLaserObject = GameObject.Find("BlueLaser");
+        if (bLaserObject != null)
+        {
+            Blaser = bluePlaneObject.GetComponent<BlueLaser>();
+        }
+        GameObject GLaserObject = GameObject.Find("GreenLaser");
+        if (GLaserObject != null)
+        {
+            Glaser = bluePlaneObject.GetComponent<greenLaser>();
+        }
+        GameObject RLaserObject = GameObject.Find("laser");
+        if (RLaserObject != null)
+        {
+            Rlaser = bluePlaneObject.GetComponent<Redlaser>();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        CalculateMove();
-    }
-
-    void CalculateMove()
-    {
         if (BossStart == true)
         {
-            transform.Translate(Vector3.down * Movement * Time.deltaTime);
-            if (transform.position.y <= 4.9) 
+            MovementDown();
+        }
+        else
+        {
+            strave();
+        }
+    }
+
+    void MovementDown()
+    {
+        transform.Translate(Vector3.down * Movement * Time.deltaTime);
+        if (transform.position.y <= 5f)
+        {
+            BossStart = false;
+            StraveBoss = true;
+            currentTarget = pointA.position;
+        }
+    }
+
+    void strave()
+    {
+        if (StraveBoss == true)
+        {
+           if (transform.position == pointA.position)
             {
-                BossStart = false;
-                StraveBoss = true;
+                currentTarget = pointB.position;
+            }
+
+            if (transform.position == pointB.position)
+            {
+                currentTarget = pointC.position;
+            }
+
+           if (transform.position == pointC.position)
+            {
+                currentTarget = pointB.position;
+            }
+           transform.position = Vector3.MoveTowards(transform.position, currentTarget, StraveSpeed * Time.deltaTime);
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "BluePlane")
+        {
+            NewBehaviourScript player = other.GetComponent<NewBehaviourScript>();
+            if (player != null)
+            {
+                player.Damage(10);
+                Debug.Log("Your Crash By enemy_1!");
+            }
+            Destroy(this.gameObject);
+        }
+
+        if (other.tag == "GrayPlane")
+        {
+            GrayePlane player = other.GetComponent<GrayePlane>();
+            if (player != null)
+            {
+                player.CrashDamage(10);
+            }
+            Destroy(this.gameObject);
+        }
+
+        if (other.tag == "BlackPlane")
+        {
+            BlackPlane player = other.GetComponent<BlackPlane>();
+            {
+                player.CrashDamage(10);
+            }
+            Destroy(this.gameObject);
+        }
+    }
+    public void HitBlueLaser(int damage)
+    {
+        HitPoints -= damage;
+        if (HitPoints < 1)
+        {
+            Destroy(this.gameObject);
+            if (BluePlane != null)
+            {
+                BluePlane.AddScorePlayer(10);
             }
         }
     }
+
+    public void HitGreenLaser(int damaged)
+    {
+        HitPoints -= damaged;
+        if (HitPoints < 1)
+        {
+            Destroy(this.gameObject);
+            if (BluePlane != null)
+            {
+                BluePlane.AddScorePlayer(10);
+            }
+        }
+    }
+
+    public void HitRedLaser(int damage)
+    {
+        HitPoints -= damage;
+        if (HitPoints < 1)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+/*    public void OnDestroy()
+    {
+        if (BluePlane != null)
+        {
+            end
+        }
+    }*/
 }
