@@ -42,10 +42,6 @@ public class BlueLaser : MonoBehaviour
         {
             MoveUp();
         }
-        if (BossMode == false)
-        {
-            MoveUp();
-        }
         else
         {
             MoveDown();
@@ -147,16 +143,6 @@ public class BlueLaser : MonoBehaviour
                 Mashle.HitBlueLaser(10);
             }
             Destroy(this.gameObject);  
-        }
-
-        if (other.tag == "Bosslvl" && EnemyLaser == false)
-        {
-            EnemyBoss Bosslvl = other.GetComponent<EnemyBoss>();
-            if (Bosslvl != null)
-            {
-                Bosslvl.HitBLaser(5);
-                Destroy(this.gameObject);
-            }
         }
     }
 }

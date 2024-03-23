@@ -30,9 +30,14 @@ public class NewBehaviourScript : MonoBehaviour
     private EnemyMashle mashle;
     private UIManager uiManager;
     private float _SheildCoolDown = 3.5f;
+    private PowerUP Powerup;
+    private bool Players = false;
 
     [SerializeField]
     private int _lives = 3;
+    [SerializeField]
+    private bool _HEAL = false; 
+    private int heal = 20;
 
     [SerializeField]
     private int score;
@@ -147,6 +152,21 @@ public class NewBehaviourScript : MonoBehaviour
         _shieldVisual.SetActive(false);
     }
 
+    public void healHitpoints()
+    {
+        _HEAL = true;
+        if (_HEAL == true)
+        {
+            _lives += heal;
+            StartCoroutine(HealsDownTime());
+        }
+    }
+
+    IEnumerator HealsDownTime()
+    {
+        yield return new WaitForSeconds(5.0f);
+        _HEAL = false;
+    }
 
     public void Damage(int crash)
     {

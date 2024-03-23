@@ -1683,7 +1683,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &1435241262
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1820,6 +1820,7 @@ MonoBehaviour:
   _sheild: {fileID: 0}
   _shieldVisual: {fileID: 616389116}
   _lives: 100
+  _HEAL: 0
   score: 0
 --- !u!1 &1473261615
 GameObject:
@@ -1921,7 +1922,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1531658696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1939,6 +1940,9 @@ MonoBehaviour:
   - {fileID: 3453467341091687907, guid: c1753c2112c71a34c9e88c960f418d52, type: 3}
   - {fileID: 2351306910406954158, guid: 335ec8240c733ee4cb3fb7ddfab34046, type: 3}
   - {fileID: 8562567203341072523, guid: 18c7b05d09f64b849a35f04b2540d07a, type: 3}
+  powerUps:
+  - {fileID: 2028504591163745877, guid: a6096115ae571ee4f960dcdccaba4089, type: 3}
+  - {fileID: 8323045952270971551, guid: 46c5a18d7e201b647ac9c81aefd59d80, type: 3}
   _isSpawning: 0
 --- !u!4 &1531658697
 Transform:
