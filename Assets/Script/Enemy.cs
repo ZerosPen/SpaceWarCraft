@@ -104,7 +104,7 @@ public class Enemy : MonoBehaviour
     public void HitBlueLaser(int damaged)
     {
         _HealtPoint -= damaged;
-        if (_HealtPoint < 1)
+        if (_HealtPoint < 0)
         {
             Destroy(this.gameObject);
             if (BluePlane != null)
@@ -113,11 +113,10 @@ public class Enemy : MonoBehaviour
             }
         }
     }
-
     public void HitGreenLaser(int damaged)
     {
         _HealtPoint-= damaged;
-        if (_HealtPoint < 1)
+        if (_HealtPoint < 0)
         {
             Destroy(this.gameObject);
         }
@@ -126,7 +125,7 @@ public class Enemy : MonoBehaviour
     public void HitRedLaser(int damage)
     {
         _HealtPoint -= damage;
-        if (_HealtPoint < 1)
+        if (_HealtPoint < 0)
         {
             Destroy(this.gameObject);
         }

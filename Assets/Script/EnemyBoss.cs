@@ -15,7 +15,7 @@ public class EnemyBoss : MonoBehaviour
     private NavMeshAgent BossPlane;
 
     [SerializeField]
-    private List<GameObject> ModeAttack;
+    private GameObject[] ModeAttack;
 
     private float fireRate = 3.0f;
     private float canFire = -1f;
@@ -41,35 +41,20 @@ public class EnemyBoss : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject bluePlaneObject = GameObject.Find("BluePlane");
-        if (bluePlaneObject != null ) 
-        {
-            BluePlane = bluePlaneObject.GetComponent<NewBehaviourScript>();
-        }
-        GameObject blackPlaneObject = GameObject.Find("BlackPlane");
-        if (blackPlaneObject != null)
-        {
-            blackPlane = blackPlaneObject.GetComponent<BlackPlane>();
-        }
-        GameObject grayPlaneObject = GameObject.Find("GrayPlane");
-        if (grayPlaneObject != null)
-        {
-            GrayPlane = grayPlaneObject.GetComponent<GrayePlane>();
-        }
         GameObject bLaserObject = GameObject.Find("BlueLaser");
         if (bLaserObject != null)
         {
-            Blaser = bluePlaneObject.GetComponent<BlueLaser>();
+            Blaser = bLaserObject.GetComponent<BlueLaser>();
         }
         GameObject GLaserObject = GameObject.Find("GreenLaser");
         if (GLaserObject != null)
         {
-            Glaser = bluePlaneObject.GetComponent<greenLaser>();
+            Glaser = GLaserObject.GetComponent<greenLaser>();
         }
         GameObject RLaserObject = GameObject.Find("laser");
         if (RLaserObject != null)
         {
-            Rlaser = bluePlaneObject.GetComponent<Redlaser>();
+            Rlaser = RLaserObject.GetComponent<Redlaser>();
         }
     }
 
@@ -94,6 +79,26 @@ public class EnemyBoss : MonoBehaviour
             BossStart = false;
             StraveBoss = true;
             currentTarget = pointA.position;
+        }
+    }
+
+    void modeAttack()
+    {
+        if (StraveBoss == true)
+        {
+            if (Time.deltaTime > canFire)
+            {
+                canFire = Time.deltaTime + fireRate;
+                fireRate = Random.Range(3f, 7f);
+                int randomModeAttack = Random.Range(0, 2);
+                GameObject Attack = Instantiate(ModeAttack[randomModeAttack], transform.position, Quaternion.identity);
+                BlueLaser[] attacks = Attack.GetComponentsInChildren<BlueLaser>();
+
+                for (int i = 0; i < attacks.Length; i++)
+                {
+                    attacks[i].AssignEnemyLaser();
+                }
+            }
         }
     }
 
@@ -150,45 +155,37 @@ public class EnemyBoss : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-    public void HitBlueLaser(int damage)
+
+    public void HitBLaser(int DMG)
     {
-        HitPoints -= damage;
-        if (HitPoints < 1)
+        HitPoints -= DMG;
+        if (HitPoints < 0)
+        {
+            Destroy(gameObject);
+            Defeat();
+        }
+    }
+    public void HitRLaser(int DMG)
+    {
+        HitPoints -= DMG;
+        if (HitPoints < 0)
         {
             Destroy(this.gameObject);
-            if (BluePlane != null)
-            {
-                BluePlane.AddScorePlayer(10);
-            }
+            Defeat();
+        }
+    }
+    public void HitGLaser(int DMG)
+    {
+        HitPoints -= DMG;
+        if (HitPoints < 0)
+        {
+            Destroy(this.gameObject);
+            Defeat();
         }
     }
 
-    public void HitGreenLaser(int damaged)
+    public void Defeat()
     {
-        HitPoints -= damaged;
-        if (HitPoints < 1)
-        {
-            Destroy(this.gameObject);
-            if (BluePlane != null)
-            {
-                BluePlane.AddScorePlayer(10);
-            }
-        }
+        Debug.Log("the Game id END!");
     }
-
-    public void HitRedLaser(int damage)
-    {
-        HitPoints -= damage;
-        if (HitPoints < 1)
-        {
-            Destroy(this.gameObject);
-        }
-    }
-/*    public void OnDestroy()
-    {
-        if (BluePlane != null)
-        {
-            end
-        }
-    }*/
 }

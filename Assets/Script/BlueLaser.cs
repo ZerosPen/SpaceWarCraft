@@ -154,7 +154,7 @@ public class BlueLaser : MonoBehaviour
             EnemyBoss Bosslvl = other.GetComponent<EnemyBoss>();
             if (Bosslvl != null)
             {
-                Bosslvl.HitBlueLaser(5);
+                Bosslvl.HitBLaser(5);
                 Destroy(this.gameObject);
             }
         }

@@ -138,7 +138,7 @@ public class Redlaser : MonoBehaviour
             EnemyBoss Bosslvl = other.GetComponent<EnemyBoss>();
             if (Bosslvl != null)
             {
-                Bosslvl.HitRedLaser(5);
+                Bosslvl.HitRLaser(5);
                 Destroy(this.gameObject);
             }
         }
