@@ -1718,6 +1718,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1531658697}
   - component: {fileID: 1531658696}
+  - component: {fileID: 1531658698}
   m_Layer: 0
   m_Name: SpawnManager
   m_TagString: Untagged
@@ -1732,7 +1733,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1531658695}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05cf27356f863d649abef595415d6c45, type: 3}
   m_Name: 
@@ -1747,7 +1748,8 @@ MonoBehaviour:
   - {fileID: 2028504591163745877, guid: a6096115ae571ee4f960dcdccaba4089, type: 3}
   EnemyBoss: {fileID: 2865237992643739542, guid: 06d398444a902f64ab1cd4dc02263dc6, type: 3}
   _isSpawning: 0
-  EndLvl: 1
+  EndLvl: 0
+  bossLvl: {fileID: 0}
 --- !u!4 &1531658697
 Transform:
   m_ObjectHideFlags: 0
@@ -1764,6 +1766,29 @@ Transform:
   - {fileID: 1223545149}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1531658698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531658695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ed8775da5fd045439ba316351102a0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _container: {fileID: 1223545148}
+  enemys:
+  - {fileID: 3453467341091687907, guid: c1753c2112c71a34c9e88c960f418d52, type: 3}
+  - {fileID: 2351306910406954158, guid: 335ec8240c733ee4cb3fb7ddfab34046, type: 3}
+  - {fileID: 8562567203341072523, guid: 18c7b05d09f64b849a35f04b2540d07a, type: 3}
+  powerUps:
+  - {fileID: 8323045952270971551, guid: 46c5a18d7e201b647ac9c81aefd59d80, type: 3}
+  - {fileID: 2028504591163745877, guid: a6096115ae571ee4f960dcdccaba4089, type: 3}
+  EnemyBoss: {fileID: 0}
+  _isSpawning: 0
+  EndLvl: 0
 --- !u!1 &1572712117
 GameObject:
   m_ObjectHideFlags: 0
@@ -2147,8 +2172,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.2441176, y: 1.7432095, z: 0.2}
-  m_Center: {x: 0.035857346, y: -0.17761937, z: 0}
+  m_Size: {x: 1.2872264, y: 1.1741971, z: 0.2}
+  m_Center: {x: 0.04878974, y: -0.091404915, z: 0}
 --- !u!114 &1958992009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2169,7 +2194,7 @@ MonoBehaviour:
   - {fileID: 2154837167036538816, guid: 5b505c68b65afc845af45f1465e827a4, type: 3}
   - {fileID: 4280312748341115100, guid: 987970b09ac370a479e81c4cd94f59a5, type: 3}
   - {fileID: 800741693861991610, guid: 6f44a77de05f2824f9fa2d5c728b4717, type: 3}
-  BossStart: 1
+  BossStart: 0
   StraveBoss: 0
   pointA: {fileID: 3890016985651027330, guid: 4b576a7e89284a74eaeba411878b574e, type: 3}
   pointB: {fileID: 6891593670310922069, guid: 5b7e3197cf5fce147a809e32edf389c6, type: 3}
