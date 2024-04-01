@@ -11,12 +11,22 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private GameObject[] powerUps;
     [SerializeField]
+    private GameObject EnemyBoss;
+    [SerializeField]
     private bool _isSpawning = false;
+    [SerializeField]
+    private bool EndLvl = false;
+    private EnemyBoss bossLvl;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        bossLvl = GameObject.Find("EnemyBoss").GetComponent<EnemyBoss>();
+        if (bossLvl == null)
+        {
+            Debug.LogError("GameObject are GONE!");
+        }
         StartCoroutine(SpawnEnemy());
         StartCoroutine(SpawnPower());
     }
@@ -24,12 +34,29 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (EndLvl == true)
+        {
+            bossLvl.bossStartLvl();
+        }
+    }
+
+    public void SpawnConttrol(bool change)
+    {
+        EndLvl = change;
     }
 
     IEnumerator SpawnEnemy()
     {
-        yield return new WaitForSeconds(3.5f);
+        if (EndLvl == false)
+        {
+            yield return new WaitForSeconds(3.5f);
+        }
+        else
+        {
+            float timer = Random.Range(3.5f, 5.5f);
+            yield return new WaitForSeconds(timer);
+        }
+
 
         while (_isSpawning == false)
         {
@@ -43,7 +70,16 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnPower()
     {
-        yield return new WaitForSeconds(3.5f);
+        if (EndLvl == true)
+        {
+            float randomtimer = 10f;
+            yield return new WaitForSeconds(randomtimer);
+        }
+        else
+        {
+            float randomtimer = Random.Range(3.5f, 5.5f);
+            yield return new WaitForSeconds(randomtimer);
+        }
 
         while (_isSpawning == false)
         {
@@ -60,3 +96,4 @@ public class SpawnManager : MonoBehaviour
     }
 
 }
+

@@ -2,23 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Falcon : MonoBehaviour
+public class EnemyMashle : MonoBehaviour
 {
     [SerializeField]
-    private float _ramspeed = 5.0f;
+    private float _speed = 3.5f;
+
+    private int _HP = 100;
 
     [SerializeField]
-    private int _HealtPoint = 10;
-
+    private GameObject _greenlaser;
     [SerializeField]
-    private GameObject _bluelaser;
     private float _firerate = 3.0f;
-    private float _canFire = -1f;
-    private int _scorepoint = 10;
+    [SerializeField]
+    private float _canFire = 1f;
+    private int _scorepoint = 15;
 
     private NewBehaviourScript BluePlane;
     private BlackPlane BlackPlane;
     private GrayePlane GrayPlane;
+
 
     // Start is called before the first frame update
     void Start()
@@ -43,24 +45,19 @@ public class Falcon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CalculateMove();
-        if (Time.time > _canFire)
+        calculateMove();
+        /*if (Time.time > _canFire)
         {
             _canFire = Time.time + _firerate;
             _firerate = Random.Range(3f, 7f);
-            GameObject enemyBlueLaser = Instantiate(_bluelaser, transform.position, Quaternion.identity);
-            BlueLaser[] lasers = enemyBlueLaser.GetComponentsInChildren<BlueLaser>();
-            for (int i = 0; i < lasers.Length; i++)
-            {
-                lasers[i].AssignEnemyLaser();
-            }
-        }
+            GameObject enemyGreenLaser = Instantiate(_greenlaser, transform.postion);
+        }*/
     }
 
-    void CalculateMove()
+    void calculateMove()
     {
-        transform.Translate(Vector3.down * _ramspeed * Time.deltaTime);
-        if (transform.position.y < -5f)
+        transform.Translate(Vector3.down * _speed * Time.deltaTime);
+        if (transform.position.y < -8f)
         {
             float randomX = Random.Range(-8, 8);
             transform.position = new Vector3(randomX, 7, 0);
@@ -74,8 +71,8 @@ public class Falcon : MonoBehaviour
             NewBehaviourScript player = other.GetComponent<NewBehaviourScript>();
             if (player != null)
             {
-                player.Damage(15);
-                Debug.Log("Your Crash By Falcon!");
+                player.Damage(10);
+                Debug.Log("Your Crash By enemy_1!");
             }
             Destroy(this.gameObject);
         }
@@ -85,7 +82,7 @@ public class Falcon : MonoBehaviour
             GrayePlane player = other.GetComponent<GrayePlane>();
             if (player != null)
             {
-                player.CrashDamage(15);
+                player.CrashDamage(10);
             }
             Destroy(this.gameObject);
         }
@@ -98,35 +95,38 @@ public class Falcon : MonoBehaviour
             }
             Destroy(this.gameObject);
         }
-
-        if (other.tag == "RedLaser")
-        {
-            Destroy(other.gameObject);
-            Destroy(this.gameObject);
-        }
     }
-    public void HitBlueLaser(int damaged)
+
+    public void HitBlueLaser(int damage)
     {
-        _HealtPoint -= damaged;
-        if (_HealtPoint < 1)
-        {
+        _HP -= damage;
+        if (_HP < 1)
+        { 
             Destroy(this.gameObject);
+            if (BluePlane != null)
+            {
+                BluePlane.AddScorePlayer(10);
+            }
         }
     }
 
     public void HitGreenLaser(int damaged)
     {
-        _HealtPoint -= damaged;
-        if (_HealtPoint < 1)
-        { 
+        _HP -= damaged;
+        if (_HP < 1)
+        {
             Destroy(this.gameObject);
+            if (BluePlane != null)
+            {
+                BluePlane.AddScorePlayer(10);
+            }
         }
     }
 
     public void HitRedLaser(int damage)
     {
-        _HealtPoint -= damage;
-        if (_HealtPoint < 1)
+        _HP -= damage;
+        if ( _HP < 1)
         {
             Destroy(this.gameObject);
         }
@@ -136,14 +136,6 @@ public class Falcon : MonoBehaviour
         if (BluePlane != null)
         {
             BluePlane.AddScorePlayer(_scorepoint);
-        }
-        if (BlackPlane != null)
-        {
-            BlackPlane.AddScorePlayer(_scorepoint);
-        }
-        if (GrayPlane != null)
-        {
-            GrayPlane.AddScorePlayer(_scorepoint);
         }
     }
 }

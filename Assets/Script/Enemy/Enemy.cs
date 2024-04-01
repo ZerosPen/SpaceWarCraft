@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour
 
     [SerializeField]
     private int _HealtPoint = 10;
+    [SerializeField]
+    private GameObject container;
 
     [SerializeField]
     private GameObject _redlaser;

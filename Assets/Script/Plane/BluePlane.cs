@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -28,6 +29,7 @@ public class NewBehaviourScript : MonoBehaviour
     private Enemy _enemy;
     private Falcon falcon;
     private EnemyMashle mashle;
+    private EnemyBoss BossLvl;
     private UIManager uiManager;
     private float _SheildCoolDown = 3.5f;
     private PowerUP Powerup;
@@ -36,8 +38,13 @@ public class NewBehaviourScript : MonoBehaviour
     [SerializeField]
     private int _lives = 3;
     [SerializeField]
-    private bool _HEAL = false; 
+    private int maxlives = 200;
+    [SerializeField]
+    private bool _HEAL = false;
     private int heal = 20;
+    [SerializeField]
+    private bool speedboostact = false;
+    private float speedbooster = 2;
 
     [SerializeField]
     private int score;
@@ -62,6 +69,12 @@ public class NewBehaviourScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (_lives > 200)
+        {
+            int penaltyHP = _lives - maxlives;
+            _lives = _lives - penaltyHP;
+        }
+
         Movement();
 
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > _coolDown)
@@ -74,7 +87,7 @@ public class NewBehaviourScript : MonoBehaviour
             shieldIsActiv();
         }
 
-        if (Input.GetKeyDown(KeyCode.Q)) 
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             QuadFiringAct();
         }
@@ -90,7 +103,7 @@ public class NewBehaviourScript : MonoBehaviour
 
         transform.Translate(direction * _speed * Time.deltaTime);
 
-        if (transform.position.y > 0)
+        if (transform.position.y >= 0)
         {
             transform.position = new Vector3(transform.position.x, 0, 0);
         }
@@ -100,11 +113,11 @@ public class NewBehaviourScript : MonoBehaviour
             transform.position = new Vector3(transform.position.x, -3.8f, 0);
         }
 
-        if (transform.position.y > 11.3f)
+        if (transform.position.y >= 11.3f)
         {
             transform.position = new Vector3(-11.3f, transform.position.y, 0);
         }
-        else if (transform.position.x < -11.3f)
+        else if (transform.position.x <= -11.3f)
         {
             transform.position = new Vector3(11.3f, transform.position.y, 0);
         }
@@ -112,7 +125,7 @@ public class NewBehaviourScript : MonoBehaviour
 
     void FireLaser()
     {
-            _coolDown = Time.time + _firerate;
+        _coolDown = Time.time + _firerate;
         if (_quadFiringAct == true)
         {
             Instantiate(_quadFiring, transform.position + new Vector3(1.15f, 0.7f, 0), Quaternion.identity);
@@ -155,17 +168,28 @@ public class NewBehaviourScript : MonoBehaviour
     public void healHitpoints()
     {
         _HEAL = true;
-        if (_HEAL == true)
-        {
-            _lives += heal;
-            StartCoroutine(HealsDownTime());
-        }
+        _lives += heal;
+        StartCoroutine(HealsDownTime());
     }
 
     IEnumerator HealsDownTime()
     {
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(1.0f);
         _HEAL = false;
+    }
+
+    public void speedboost()
+    {
+        speedboostact = true;
+        _speed *= speedbooster;
+        StartCoroutine(speedBoostDown());
+    }
+
+    IEnumerator speedBoostDown()
+    {
+        yield return new WaitForSeconds(5.0f);
+        speedboostact = false;
+        _speed /= speedbooster;
     }
 
     public void Damage(int crash)
@@ -193,5 +217,15 @@ public class NewBehaviourScript : MonoBehaviour
     {
         score += points;
         uiManager.UpdateScore(score);
+        if (score >= 250)
+        {
+            EndLvl();
+        }
+
+    }
+
+    void EndLvl()
+    {
+        _spawnManager.SpawnConttrol(true);
     }
 }

@@ -58,7 +58,7 @@ public class PowerUP : MonoBehaviour
                         player.healHitpoints();
                         break;
                     case 1:
-                        player.healHitpoints();
+                        player.speedboost();
                         break;
                     default:
                         Debug.Log("Default Value");

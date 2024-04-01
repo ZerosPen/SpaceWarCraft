@@ -12,7 +12,8 @@ public class EnemyBoss : MonoBehaviour
     private float Movement = 5.0f;
     [SerializeField]
     private float StraveSpeed = 0.5f;
-    private NavMeshAgent BossPlane;
+    [SerializeField]
+    private GameObject BossPlane;
 
     [SerializeField]
     private GameObject[] ModeAttack;
@@ -20,6 +21,7 @@ public class EnemyBoss : MonoBehaviour
     private float fireRate = 3.0f;
     private float canFire = -1f;
 
+    private SpawnManager SPmanager;
     private NewBehaviourScript BluePlane;
     private BlackPlane blackPlane;
     private GrayePlane GrayPlane;
@@ -41,6 +43,11 @@ public class EnemyBoss : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SPmanager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        if (SPmanager == null)
+        {
+            Debug.LogError("The Spawn Manager is NULL");
+        }
         GameObject bLaserObject = GameObject.Find("BlueLaser");
         if (bLaserObject != null)
         {
@@ -56,6 +63,11 @@ public class EnemyBoss : MonoBehaviour
         {
             Rlaser = RLaserObject.GetComponent<Redlaser>();
         }
+    }
+
+    public void bossStartLvl()
+    {
+        BossStart = true;
     }
 
     // Update is called once per frame
@@ -77,6 +89,7 @@ public class EnemyBoss : MonoBehaviour
         if (transform.position.y <= 5f)
         {
             BossStart = false;
+            SPmanager.SpawnConttrol(false);
             StraveBoss = true;
             currentTarget = pointA.position;
         }

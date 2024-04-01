@@ -2,25 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMashle : MonoBehaviour
+public class Falcon : MonoBehaviour
 {
     [SerializeField]
-    private float _speed = 3.5f;
-
-    private int _HP = 100;
+    private float _ramspeed = 5.0f;
 
     [SerializeField]
-    private GameObject _greenlaser;
+    private int _HealtPoint = 10;
+
     [SerializeField]
+    private GameObject _bluelaser;
     private float _firerate = 3.0f;
-    [SerializeField]
-    private float _canFire = 1f;
-    private int _scorepoint = 10;
+    private float _canFire = -1f;
+    private int _scorepoint = 20;
 
     private NewBehaviourScript BluePlane;
     private BlackPlane BlackPlane;
     private GrayePlane GrayPlane;
-
 
     // Start is called before the first frame update
     void Start()
@@ -45,19 +43,24 @@ public class EnemyMashle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        calculateMove();
-        /*if (Time.time > _canFire)
+        CalculateMove();
+        if (Time.time > _canFire)
         {
             _canFire = Time.time + _firerate;
             _firerate = Random.Range(3f, 7f);
-            GameObject enemyGreenLaser = Instantiate(_greenlaser, transform.postion);
-        }*/
+            GameObject enemyBlueLaser = Instantiate(_bluelaser, transform.position, Quaternion.identity);
+            BlueLaser[] lasers = enemyBlueLaser.GetComponentsInChildren<BlueLaser>();
+            for (int i = 0; i < lasers.Length; i++)
+            {
+                lasers[i].AssignEnemyLaser();
+            }
+        }
     }
 
-    void calculateMove()
+    void CalculateMove()
     {
-        transform.Translate(Vector3.down * _speed * Time.deltaTime);
-        if (transform.position.y < -8f)
+        transform.Translate(Vector3.down * _ramspeed * Time.deltaTime);
+        if (transform.position.y < -5f)
         {
             float randomX = Random.Range(-8, 8);
             transform.position = new Vector3(randomX, 7, 0);
@@ -71,8 +74,8 @@ public class EnemyMashle : MonoBehaviour
             NewBehaviourScript player = other.GetComponent<NewBehaviourScript>();
             if (player != null)
             {
-                player.Damage(10);
-                Debug.Log("Your Crash By enemy_1!");
+                player.Damage(15);
+                Debug.Log("Your Crash By Falcon!");
             }
             Destroy(this.gameObject);
         }
@@ -82,7 +85,7 @@ public class EnemyMashle : MonoBehaviour
             GrayePlane player = other.GetComponent<GrayePlane>();
             if (player != null)
             {
-                player.CrashDamage(10);
+                player.CrashDamage(15);
             }
             Destroy(this.gameObject);
         }
@@ -95,38 +98,35 @@ public class EnemyMashle : MonoBehaviour
             }
             Destroy(this.gameObject);
         }
-    }
 
-    public void HitBlueLaser(int damage)
-    {
-        _HP -= damage;
-        if (_HP < 1)
-        { 
+        if (other.tag == "RedLaser")
+        {
+            Destroy(other.gameObject);
             Destroy(this.gameObject);
-            if (BluePlane != null)
-            {
-                BluePlane.AddScorePlayer(10);
-            }
+        }
+    }
+    public void HitBlueLaser(int damaged)
+    {
+        _HealtPoint -= damaged;
+        if (_HealtPoint < 1)
+        {
+            Destroy(this.gameObject);
         }
     }
 
     public void HitGreenLaser(int damaged)
     {
-        _HP -= damaged;
-        if (_HP < 1)
-        {
+        _HealtPoint -= damaged;
+        if (_HealtPoint < 1)
+        { 
             Destroy(this.gameObject);
-            if (BluePlane != null)
-            {
-                BluePlane.AddScorePlayer(10);
-            }
         }
     }
 
     public void HitRedLaser(int damage)
     {
-        _HP -= damage;
-        if ( _HP < 1)
+        _HealtPoint -= damage;
+        if (_HealtPoint < 1)
         {
             Destroy(this.gameObject);
         }
@@ -136,6 +136,14 @@ public class EnemyMashle : MonoBehaviour
         if (BluePlane != null)
         {
             BluePlane.AddScorePlayer(_scorepoint);
+        }
+        if (BlackPlane != null)
+        {
+            BlackPlane.AddScorePlayer(_scorepoint);
+        }
+        if (GrayPlane != null)
+        {
+            GrayPlane.AddScorePlayer(_scorepoint);
         }
     }
 }
