@@ -175,7 +175,6 @@ public class EnemyBoss : MonoBehaviour
         if (HitPoints < 0)
         {
             Destroy(gameObject);
-            Defeat();
         }
     }
     public void HitRLaser(int DMG)
@@ -184,7 +183,7 @@ public class EnemyBoss : MonoBehaviour
         if (HitPoints < 0)
         {
             Destroy(this.gameObject);
-            Defeat();
+                
         }
     }
     public void HitGLaser(int DMG)
@@ -193,7 +192,6 @@ public class EnemyBoss : MonoBehaviour
         if (HitPoints < 0)
         {
             Destroy(this.gameObject);
-            Defeat();
         }
     }
 

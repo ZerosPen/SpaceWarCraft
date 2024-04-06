@@ -144,7 +144,7 @@ public class BlueLaser : MonoBehaviour
             }
             Destroy(this.gameObject);  
         }
-        if (other.tag == "BossLvl" && EnemyLaser!= false)
+        if (other.tag == "BossLvl" && EnemyLaser == false)
         {
             EnemyBoss Boss = other.GetComponent<EnemyBoss>();
             if (Boss != null)

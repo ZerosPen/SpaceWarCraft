@@ -16,6 +16,7 @@ public class SpawnManager : MonoBehaviour
     private bool _isSpawning = false;
     [SerializeField]
     private bool EndLvl = false;
+    private bool SpawnRate = false;
     private EnemyBoss bossLvl;
 
 
@@ -43,11 +44,12 @@ public class SpawnManager : MonoBehaviour
     public void SpawnConttrol(bool change)
     {
         EndLvl = change;
+        SpawnRate = true;
     }
 
     IEnumerator SpawnEnemy()
     {
-        if (EndLvl == false)
+        if (SpawnRate == false)
         {
             yield return new WaitForSeconds(3.5f);
         }
@@ -70,7 +72,7 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnPower()
     {
-        if (EndLvl == true)
+        if (SpawnRate == true)
         {
             float randomtimer = 10f;
             yield return new WaitForSeconds(randomtimer);

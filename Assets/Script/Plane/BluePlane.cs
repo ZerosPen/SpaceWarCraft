@@ -17,6 +17,8 @@ public class NewBehaviourScript : MonoBehaviour
     private float _firerate = 0.35f;
     [SerializeField]
     private float _coolDown = 0.05f;
+    [SerializeField]
+    private GameObject Boss;
 
     [SerializeField]
     private SpriteRenderer _sheild;
@@ -34,6 +36,8 @@ public class NewBehaviourScript : MonoBehaviour
     private float _SheildCoolDown = 3.5f;
     private PowerUP Powerup;
     private bool Players = false;
+    [SerializeField]
+    private bool EndLvlCon = false;
 
     [SerializeField]
     private int _lives = 3;
@@ -91,6 +95,7 @@ public class NewBehaviourScript : MonoBehaviour
         {
             QuadFiringAct();
         }
+        EndLvl();
 
     }
 
@@ -217,15 +222,23 @@ public class NewBehaviourScript : MonoBehaviour
     {
         score += points;
         uiManager.UpdateScore(score);
-        if (score >= 250)
-        {
-            EndLvl();
-        }
-
     }
 
-    void EndLvl()
+    public void EndLvl()
     {
-        _spawnManager.SpawnConttrol(true);
+        if (score >= 100 && EndLvlCon == false)
+        {
+            _spawnManager.SpawnConttrol(true);
+            EndLvlCon = true;
+        }
+        else
+        {
+            _spawnManager.SpawnConttrol(false);
+        }
+    }
+
+    public void swicthcond()
+    {
+        EndLvlCon = true;
     }
 }
