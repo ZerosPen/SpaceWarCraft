@@ -18,6 +18,7 @@ public class SpawnManager : MonoBehaviour
     private bool EndLvl = false;
     private bool SpawnRate = false;
     private EnemyBoss bossLvl;
+    private GameManager GManager;
 
 
     // Start is called before the first frame update
@@ -86,7 +87,7 @@ public class SpawnManager : MonoBehaviour
         while (_isSpawning == false)
         {
             Vector3 posToSpawn = new Vector3(Random.Range(-8, 8), 7, 0);
-            int randomPoweUpSpawn = Random.Range(0, 1);
+            int randomPoweUpSpawn = Random.Range(0, 4);
             GameObject PowerUP = Instantiate(powerUps[randomPoweUpSpawn], posToSpawn, Quaternion.identity);
             yield return new WaitForSeconds(5.0f);
         }
@@ -97,5 +98,9 @@ public class SpawnManager : MonoBehaviour
         _isSpawning = true;
     }
 
+    public void Condition()
+    {
+        _isSpawning = true;
+    }
 }
 

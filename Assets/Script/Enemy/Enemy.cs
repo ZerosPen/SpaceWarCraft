@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     private float _ramspeed = 5.0f;
 
     [SerializeField]
-    private int _HealtPoint = 10;
+    private int _HealtPoint = 2;
     [SerializeField]
     private GameObject container;
 
@@ -77,7 +77,7 @@ public class Enemy : MonoBehaviour
             NewBehaviourScript player = other.GetComponent<NewBehaviourScript>();
             if (player != null)
             {
-                player.Damage(10);
+                player.Damage(2);
                 Debug.Log("Your Crash By enemy_1!");
                 Destroy(this.gameObject);
             }
@@ -88,7 +88,7 @@ public class Enemy : MonoBehaviour
             GrayePlane player = other.GetComponent<GrayePlane>();
             if (player != null)
             {
-                player.CrashDamage(10);
+                player.CrashDamage(2);
             }
             Destroy(this.gameObject);
         }
@@ -97,7 +97,7 @@ public class Enemy : MonoBehaviour
         {
             BlackPlane player = other.GetComponent<BlackPlane>();  
             {
-                player.CrashDamage(10);
+                player.CrashDamage(2);
             }
             Destroy(this.gameObject);
         }

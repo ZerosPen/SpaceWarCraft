@@ -88,7 +88,7 @@ public class BlueLaser : MonoBehaviour
             BlackPlane player = other.GetComponent<BlackPlane>();
             if (player != null)
             {
-                player.LaserDamage(5);
+                player.LaserDamage(1);
             }
             Destroy(this.gameObject);
         }
@@ -98,7 +98,7 @@ public class BlueLaser : MonoBehaviour
             GrayePlane player = other.GetComponent<GrayePlane>();
             if (player != null)
             {
-                player.Damagelaser(5);
+                player.Damagelaser(1);
             }
             Destroy(this.gameObject);
         }
@@ -108,7 +108,7 @@ public class BlueLaser : MonoBehaviour
             NewBehaviourScript player = other.GetComponent<NewBehaviourScript>();
             if (player != null)
             {
-                player.DamageLaser(5);
+                player.DamageLaser(1);
             }
             Destroy(this.gameObject);
         }
@@ -118,7 +118,7 @@ public class BlueLaser : MonoBehaviour
             Enemy enemy = other.GetComponent<Enemy>();
             if (enemy !=null)
             {
-                enemy.HitBlueLaser(10);
+                enemy.HitBlueLaser(1);
             }
             Destroy(this.gameObject);
             
@@ -129,7 +129,7 @@ public class BlueLaser : MonoBehaviour
             Falcon falcon = other.GetComponent<Falcon>();
             if (falcon != null)
             {
-                falcon.HitBlueLaser(10);
+                falcon.HitBlueLaser(1);
             }
             Destroy(this.gameObject);
             
@@ -140,16 +140,16 @@ public class BlueLaser : MonoBehaviour
             EnemyMashle Mashle = other.GetComponent<EnemyMashle>();
             if (Mashle != null)
             {
-                Mashle.HitBlueLaser(10);
+                Mashle.HitBlueLaser(1);
             }
             Destroy(this.gameObject);  
         }
-        if (other.tag == "BossLvl" && EnemyLaser == false)
+        if (other.tag == "Bosslvl" && EnemyLaser == false)
         {
             EnemyBoss Boss = other.GetComponent<EnemyBoss>();
             if (Boss != null)
             {
-                Boss.HitBLaser(10);
+                Boss.HitBlueLaser(1);
             }
             Destroy(this.gameObject);
         }

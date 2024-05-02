@@ -71,7 +71,7 @@ public class greenLaser : MonoBehaviour
             NewBehaviourScript player = other.GetComponent<NewBehaviourScript>();
             if (player != null)
             {
-                player.DamageLaser(20);
+                player.DamageLaser(1);
             }
             Destroy(this.gameObject);
         }
@@ -81,7 +81,7 @@ public class greenLaser : MonoBehaviour
             BlackPlane player = other.GetComponent<BlackPlane>();
             if (player != null)
             {
-                player.LaserDamage(20);
+                player.LaserDamage(1);
             }
             Destroy(this.gameObject);
         }
@@ -91,7 +91,7 @@ public class greenLaser : MonoBehaviour
             GrayePlane player = other.GetComponent<GrayePlane>();
             if (player != null)
             {
-                player.Damagelaser(20);
+                player.Damagelaser(1);
             }
             Destroy(this.gameObject);
         }
@@ -101,7 +101,7 @@ public class greenLaser : MonoBehaviour
             Enemy enemy = other.GetComponent<Enemy>();
             if (enemy != null)
             {
-                enemy.HitGreenLaser(25);
+                enemy.HitGreenLaser(1);
 
             }
             Destroy(this.gameObject);
@@ -112,7 +112,7 @@ public class greenLaser : MonoBehaviour
             Falcon falcon = other.GetComponent<Falcon>();
             if (falcon != null)
             {
-                falcon.HitGreenLaser(25);
+                falcon.HitGreenLaser(1);
             }
             Destroy(this.gameObject);
         }
@@ -122,7 +122,7 @@ public class greenLaser : MonoBehaviour
             EnemyMashle Mashle = other.GetComponent<EnemyMashle>();
             if (Mashle != null)
             {
-                Mashle.HitGreenLaser(25);
+                Mashle.HitGreenLaser(1);
                 Destroy(this.gameObject);
             }
         }
@@ -132,7 +132,7 @@ public class greenLaser : MonoBehaviour
             EnemyBoss Bosslvl = other.GetComponent<EnemyBoss>();
             if (Bosslvl != null)
             {
-                Bosslvl.HitGLaser(5);
+                Bosslvl.HitGLaser(1);
                 Destroy(this.gameObject);
             }
         }

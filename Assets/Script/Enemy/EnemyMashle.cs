@@ -7,7 +7,7 @@ public class EnemyMashle : MonoBehaviour
     [SerializeField]
     private float _speed = 3.5f;
 
-    private int _HP = 100;
+    private int _HP = 3;
 
     [SerializeField]
     private GameObject _greenlaser;
@@ -71,7 +71,7 @@ public class EnemyMashle : MonoBehaviour
             NewBehaviourScript player = other.GetComponent<NewBehaviourScript>();
             if (player != null)
             {
-                player.Damage(10);
+                player.Damage(2);
                 Debug.Log("Your Crash By enemy_1!");
             }
             Destroy(this.gameObject);
@@ -82,7 +82,7 @@ public class EnemyMashle : MonoBehaviour
             GrayePlane player = other.GetComponent<GrayePlane>();
             if (player != null)
             {
-                player.CrashDamage(10);
+                player.CrashDamage(2);
             }
             Destroy(this.gameObject);
         }
@@ -91,7 +91,7 @@ public class EnemyMashle : MonoBehaviour
         {
             BlackPlane player = other.GetComponent<BlackPlane>();
             {
-                player.CrashDamage(10);
+                player.CrashDamage(2);
             }
             Destroy(this.gameObject);
         }

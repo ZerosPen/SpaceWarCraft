@@ -2,12 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class NewBehaviourScript : MonoBehaviour
 {
+    public PlaneDatabase planeDB;
+    public SpriteRenderer planemodel;
+
+    private int selectedOption = 0;
+
     [SerializeField]
     private float _speed = 4.5f;
+    [SerializeField]
+    private AudioClip _laserSound;
+    private AudioSource _audioSource;
 
     [SerializeField]
     private GameObject _blueLaserPrefab;
@@ -33,6 +41,7 @@ public class NewBehaviourScript : MonoBehaviour
     private EnemyMashle mashle;
     private EnemyBoss BossLvl;
     private UIManager uiManager;
+    private GameManager GManager;
     private float _SheildCoolDown = 3.5f;
     private PowerUP Powerup;
     private bool Players = false;
@@ -45,7 +54,7 @@ public class NewBehaviourScript : MonoBehaviour
     private int maxlives = 200;
     [SerializeField]
     private bool _HEAL = false;
-    private int heal = 20;
+    private int heal = 1;
     [SerializeField]
     private bool speedboostact = false;
     private float speedbooster = 2;
@@ -57,7 +66,16 @@ public class NewBehaviourScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = new Vector3(0, 0, 0);
+        if (!PlayerPrefs.HasKey("selectOption"))
+        {
+            selectedOption = 0;
+        }
+        else
+        {
+            Load();
+        }
+        UpdatePlane(selectedOption);
+
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         if (_spawnManager == null)
         {
@@ -68,6 +86,17 @@ public class NewBehaviourScript : MonoBehaviour
         {
             Debug.LogError("The UI Manager is NULL");
         }
+        GManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        _audioSource = GetComponent<AudioSource>();
+        if (_audioSource == null)
+        {
+            Debug.LogError("The AudioSource on the Player is NULL");
+        }
+        else
+        {
+            _audioSource.clip = _laserSound;
+        }
+        transform.position = new Vector3(0, 0, 0);
     }
 
     // Update is called once per frame
@@ -98,6 +127,18 @@ public class NewBehaviourScript : MonoBehaviour
         EndLvl();
 
     }
+
+    private void UpdatePlane(int selectedOption)
+    {
+        Plane plane = planeDB.GetPlane(selectedOption);
+        planemodel.sprite = plane.PlaneModels;
+    }
+
+    private void Load()
+    {
+        selectedOption = PlayerPrefs.GetInt("selectOption");
+    }
+
 
     void Movement()
     {
@@ -145,6 +186,7 @@ public class NewBehaviourScript : MonoBehaviour
             Instantiate(_blueLaserPrefab, transform.position + new Vector3(1.15f, 1.05f, 0), Quaternion.identity);
             Instantiate(_blueLaserPrefab, transform.position + new Vector3(-1.15f, 1.05f, 0), Quaternion.identity);
         }
+        _audioSource.Play();
     }
 
     void QuadFiringAct()
@@ -174,6 +216,27 @@ public class NewBehaviourScript : MonoBehaviour
     {
         _HEAL = true;
         _lives += heal;
+        if (_lives == 2)
+        {
+            Debug.Log("Small repair to all Engine and wing right and left!!!");
+        }
+        if (_lives == 3)
+        {
+            Debug.Log("all Engine and wing right and left has been repair !!!");
+        }
+       /* if (_lives == 4)
+        {
+            Debug.Log("wing left get some armor");
+        }
+        if (_lives == 5)
+        {
+            Debug.Log("wing right get some armor");
+        }
+        else if (_lives == 6)
+        {
+            Debug.Log("all frame been upgrade");
+        }*/
+       uiManager.updatelive(_lives);
         StartCoroutine(HealsDownTime());
     }
 
@@ -201,6 +264,16 @@ public class NewBehaviourScript : MonoBehaviour
     {
         _lives -= crash;
 
+        if (_lives == 2)
+        {
+            Debug.Log("Engine 1 and wing left is broken!!!");
+        }
+        else if (_lives == 1)
+        {
+            Debug.Log("lost all Engine and wing right and left is broken!!!");
+        }
+        uiManager.updatelive(_lives);
+
         if (_lives < 1)
         {
             _spawnManager.OnPlayerDeath();
@@ -211,11 +284,25 @@ public class NewBehaviourScript : MonoBehaviour
     public void DamageLaser(int hit)
     {
         _lives -= hit;
+
+        if (_lives == 2)
+        {
+            Debug.Log("Engine 1 and wing left is broken!!!");
+        }
+        if (_lives == 1)
+        {
+            Debug.Log("lost all Engine and wing right and left is broken!!!");
+        }
+
         if (_lives < 1)
         {
+            Debug.Log("we lost a spacecraft!!!");
             _spawnManager.OnPlayerDeath();
             Destroy(this.gameObject);
+            GManager.GameOver();
         }
+
+        uiManager.updatelive(_lives);
     }
 
     public void AddScorePlayer(int points)
@@ -226,7 +313,7 @@ public class NewBehaviourScript : MonoBehaviour
 
     public void EndLvl()
     {
-        if (score >= 100 && EndLvlCon == false)
+        if (score >= 150 && EndLvlCon == false)
         {
             _spawnManager.SpawnConttrol(true);
             EndLvlCon = true;

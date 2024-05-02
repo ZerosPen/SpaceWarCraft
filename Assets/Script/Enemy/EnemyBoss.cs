@@ -28,6 +28,7 @@ public class EnemyBoss : MonoBehaviour
     private BlueLaser Blaser;
     private greenLaser Glaser;
     private Redlaser Rlaser;
+    private GameManager GManager;
    
     [SerializeField]
     private bool BossStart = false;
@@ -47,6 +48,11 @@ public class EnemyBoss : MonoBehaviour
         if (SPmanager == null)
         {
             Debug.LogError("The Spawn Manager is NULL");
+        }
+        GManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        if (GManager == null)
+        {
+            Debug.LogError("The Game Manager is NULL");
         }
         GameObject bLaserObject = GameObject.Find("BlueLaser");
         if (bLaserObject != null)
@@ -169,12 +175,13 @@ public class EnemyBoss : MonoBehaviour
         }
     }
 
-    public void HitBLaser(int DMG)
+    public void HitBlueLaser(int DMG)
     {
         HitPoints -= DMG;
         if (HitPoints < 0)
         {
-            Destroy(gameObject);
+            Destroy(this.gameObject);
+            Defeat();
         }
     }
     public void HitRLaser(int DMG)
@@ -182,8 +189,7 @@ public class EnemyBoss : MonoBehaviour
         HitPoints -= DMG;
         if (HitPoints < 0)
         {
-            Destroy(this.gameObject);
-                
+            Destroy(this.gameObject);   
         }
     }
     public void HitGLaser(int DMG)
@@ -197,6 +203,7 @@ public class EnemyBoss : MonoBehaviour
 
     public void Defeat()
     {
+        GManager.winLvl();
         Debug.Log("the Game id END!");
     }
 }

@@ -5,16 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    private AudioSource _audioSource;
     [SerializeField]
-    private AudioClip _audipclip;
-    private AudioSource _audioSource; 
+    private AudioClip[] _AudioClip;
+    private SpawnPlatfon _Spawnplatfon;
     // Start is called before the first frame update
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
         if (_audioSource == null)
         {
-            Debug.LogError("AudioScource is NULL");
+            Debug.LogError("AudipSource is Error!");
         }
         _audioSource.Play();
     }
@@ -28,18 +29,18 @@ public class MainMenu : MonoBehaviour
     public void loadArenaGame()
     {
         Debug.Log("Going to Airfield...");
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene("Switch");
     }
 
     public void LoadSettingsAirCraft()
     {
         Debug.Log("Going to Hanggar Aircraft...");
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("SettingMenu");
+        
     }
     public void LoadAirField()
     {
         Debug.Log("Going to Hanggar Aircraft...");
         SceneManager.LoadScene("mainmenu");
     }
-
 }

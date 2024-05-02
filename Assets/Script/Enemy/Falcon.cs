@@ -8,7 +8,7 @@ public class Falcon : MonoBehaviour
     private float _ramspeed = 5.0f;
 
     [SerializeField]
-    private int _HealtPoint = 10;
+    private int _HealtPoint = 4;
 
     [SerializeField]
     private GameObject _bluelaser;
@@ -85,7 +85,7 @@ public class Falcon : MonoBehaviour
             GrayePlane player = other.GetComponent<GrayePlane>();
             if (player != null)
             {
-                player.CrashDamage(15);
+                player.CrashDamage(2);
             }
             Destroy(this.gameObject);
         }
@@ -94,7 +94,7 @@ public class Falcon : MonoBehaviour
         {
             BlackPlane player = other.GetComponent<BlackPlane>();
             {
-                player.CrashDamage(10);
+                player.CrashDamage(2);
             }
             Destroy(this.gameObject);
         }
