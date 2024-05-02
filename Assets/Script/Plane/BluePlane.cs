@@ -220,7 +220,7 @@ public class NewBehaviourScript : MonoBehaviour
         {
             Debug.Log("Small repair to all Engine and wing right and left!!!");
         }
-        if (_lives == 3)
+        else if (_lives == 3)
         {
             Debug.Log("all Engine and wing right and left has been repair !!!");
         }
@@ -289,7 +289,7 @@ public class NewBehaviourScript : MonoBehaviour
         {
             Debug.Log("Engine 1 and wing left is broken!!!");
         }
-        if (_lives == 1)
+        else if (_lives == 1)
         {
             Debug.Log("lost all Engine and wing right and left is broken!!!");
         }
