@@ -132,7 +132,7 @@ public class greenLaser : MonoBehaviour
             EnemyBoss Bosslvl = other.GetComponent<EnemyBoss>();
             if (Bosslvl != null)
             {
-                Bosslvl.HitGLaser(1);
+                Bosslvl.DamageLaser(1);
                 Destroy(this.gameObject);
             }
         }

@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private bool _isGameOver;
+    private bool _isWin;
 
     private void Update()
     {
@@ -17,10 +18,14 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene(0);
         }
+        if (Input.GetKeyDown(KeyCode.Escape) && _isWin == true)
+        {
+            SceneManager.LoadScene(0);
+        }
     }
-    public void winLvl()
+    public void Winning()
     {
-        Debug.Log("WIN!!!");
+        _isWin = true;
     }
 
     public void GameOver()

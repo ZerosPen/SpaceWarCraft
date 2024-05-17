@@ -22,6 +22,8 @@ public class UIManager : MonoBehaviour
     private Text _GameOverText;
     [SerializeField]
     private Text _RestartText;
+    [SerializeField]
+    private Text _WinningText;
 
     // Start is called before the first frame update
     void Start()
@@ -65,8 +67,16 @@ public class UIManager : MonoBehaviour
         {
             GameOverSec();
         }
-            
     }
+
+    /*public void updateBossLive(int currentbosslive) 
+    {
+        if (currentbosslive == 0)
+        {
+            WinnerSec();
+        }
+    }*/
+
 
     void GameOverSec()
     {
@@ -86,4 +96,24 @@ public class UIManager : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
     }
+
+    public void WinnerSec()
+    {
+        _gameManager.Winning();
+        _WinningText.gameObject.SetActive(true);
+        _RestartText.gameObject.SetActive(true);
+        StartCoroutine(WinnerFlickerRoutine());
+    }
+
+    IEnumerator WinnerFlickerRoutine()
+    {
+        while (true)
+        {
+            _WinningText.text = "ENEMY BEEN DEFEAT!!";
+            yield return new WaitForSeconds(0.5f);
+            _WinningText.text = "";
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+
 }

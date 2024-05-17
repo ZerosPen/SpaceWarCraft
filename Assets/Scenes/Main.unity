@@ -318,7 +318,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &351620315
 RectTransform:
   m_ObjectHideFlags: 0
@@ -435,6 +435,86 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8f37ec713bd1b174b85da9ef5b9f3057, type: 3}
   _GameOverText: {fileID: 813317118}
   _RestartText: {fileID: 1566516760}
+  _WinningText: {fileID: 392233969}
+--- !u!1 &392233967
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 392233968}
+  - component: {fileID: 392233970}
+  - component: {fileID: 392233969}
+  m_Layer: 5
+  m_Name: Winner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &392233968
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 392233967}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1178108852}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -385, y: -153.75}
+  m_SizeDelta: {x: 619.2281, y: 107.398}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &392233969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 392233967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 35
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 300
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'ENEMY BEEN DEFEAT!! '
+--- !u!222 &392233970
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 392233967}
+  m_CullTransparentMesh: 1
 --- !u!1 &415849465
 GameObject:
   m_ObjectHideFlags: 0
@@ -1684,6 +1764,7 @@ RectTransform:
   m_Children:
   - {fileID: 597766316}
   - {fileID: 813317117}
+  - {fileID: 392233968}
   - {fileID: 1566516759}
   - {fileID: 1819100654}
   - {fileID: 351620315}
@@ -1945,8 +2026,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.9399996, y: 5.0499997, z: 0.2}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.7952819, y: 1.9629834, z: 0.2}
+  m_Center: {x: 0.014425278, y: -0.5337362, z: 0}
 --- !u!114 &1435241266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2765,7 +2846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d53f524a3a50e744fa82a30db43c0e7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HitPoints: 100
+  HitPoints: 5
   Movement: 2.5
   StraveSpeed: 2.5
   BossPlane: {fileID: 1958992006}
@@ -2773,7 +2854,7 @@ MonoBehaviour:
   - {fileID: 2154837167036538816, guid: 5b505c68b65afc845af45f1465e827a4, type: 3}
   - {fileID: 4280312748341115100, guid: 987970b09ac370a479e81c4cd94f59a5, type: 3}
   - {fileID: 800741693861991610, guid: 6f44a77de05f2824f9fa2d5c728b4717, type: 3}
-  BossStart: 0
+  BossStart: 1
   StraveBoss: 0
   pointA: {fileID: 3890016985651027330, guid: 4b576a7e89284a74eaeba411878b574e, type: 3}
   pointB: {fileID: 6891593670310922069, guid: 5b7e3197cf5fce147a809e32edf389c6, type: 3}

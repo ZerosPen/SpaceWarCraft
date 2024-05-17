@@ -29,6 +29,7 @@ public class EnemyBoss : MonoBehaviour
     private greenLaser Glaser;
     private Redlaser Rlaser;
     private GameManager GManager;
+    private UIManager _uiManager;
    
     [SerializeField]
     private bool BossStart = false;
@@ -175,35 +176,29 @@ public class EnemyBoss : MonoBehaviour
         }
     }
 
-    public void HitBlueLaser(int DMG)
+    public void DamageLaser(int DMG)
     {
         HitPoints -= DMG;
-        if (HitPoints < 0)
+        if (HitPoints < 13)
         {
+            Debug.Log("Enemy left Engine and wing is broken!!!");
+        }
+        if (HitPoints < 6)
+        {
+            Debug.Log("Enemy righ tEngine and wing is broken!!!");
+        }
+        if (HitPoints == 0)
+        {
+            Debug.Log("Enemy Been Destroy");
             Destroy(this.gameObject);
             Defeat();
-        }
-    }
-    public void HitRLaser(int DMG)
-    {
-        HitPoints -= DMG;
-        if (HitPoints < 0)
-        {
-            Destroy(this.gameObject);   
-        }
-    }
-    public void HitGLaser(int DMG)
-    {
-        HitPoints -= DMG;
-        if (HitPoints < 0)
-        {
-            Destroy(this.gameObject);
         }
     }
 
     public void Defeat()
     {
-        GManager.winLvl();
-        Debug.Log("the Game id END!");
+        GManager.Winning();
+        _uiManager.WinnerSec();
+        Debug.Log("the Game is END!");
     }
 }

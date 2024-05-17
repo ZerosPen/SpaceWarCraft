@@ -7,7 +7,7 @@ public class EnemyMashle : MonoBehaviour
     [SerializeField]
     private float _speed = 3.5f;
 
-    private int _HP = 3;
+    private int _HP = 2;
 
     [SerializeField]
     private GameObject _greenlaser;
