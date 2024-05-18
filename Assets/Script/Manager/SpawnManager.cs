@@ -13,7 +13,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private GameObject EnemyBoss;
     [SerializeField]
-    private bool _isSpawning = false;
+    private bool _stopSpawning = false;
     [SerializeField]
     private bool EndLvl = false;
     private bool SpawnRate = false;
@@ -61,7 +61,7 @@ public class SpawnManager : MonoBehaviour
         }
 
 
-        while (_isSpawning == false)
+        while (_stopSpawning == false)
         {
             Vector3 posToSpawn = new Vector3(Random.Range(-8, 8), 7, 0);
             int randomEnemySpawn = Random.Range(0, 2);
@@ -84,7 +84,7 @@ public class SpawnManager : MonoBehaviour
             yield return new WaitForSeconds(randomtimer);
         }
 
-        while (_isSpawning == false)
+        while (_stopSpawning == false)
         {
             Vector3 posToSpawn = new Vector3(Random.Range(-8, 8), 7, 0);
             int randomPoweUpSpawn = Random.Range(0, 4);
@@ -95,12 +95,7 @@ public class SpawnManager : MonoBehaviour
 
     public void OnPlayerDeath()
     {
-        _isSpawning = true;
-    }
-
-    public void Condition()
-    {
-        _isSpawning = true;
+        _stopSpawning = true;
     }
 }
 

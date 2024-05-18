@@ -25,6 +25,7 @@ public class NewBehaviourScript : MonoBehaviour
     private float _firerate = 0.35f;
     [SerializeField]
     private float _coolDown = 0.05f;
+
     [SerializeField]
     private GameObject Boss;
 
@@ -51,7 +52,7 @@ public class NewBehaviourScript : MonoBehaviour
     [SerializeField]
     private int _lives = 3;
     [SerializeField]
-    private int maxlives = 200;
+    private int maxlives = 6;
     [SerializeField]
     private bool _HEAL = false;
     private int heal = 1;
@@ -61,6 +62,8 @@ public class NewBehaviourScript : MonoBehaviour
 
     [SerializeField]
     private int score;
+    [SerializeField]
+    private bool winning = false;
 
 
     // Start is called before the first frame update
@@ -102,7 +105,7 @@ public class NewBehaviourScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_lives > 200)
+        if (_lives > 6)
         {
             int penaltyHP = _lives - maxlives;
             _lives = _lives - penaltyHP;
@@ -142,51 +145,52 @@ public class NewBehaviourScript : MonoBehaviour
 
     void Movement()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+   
+            float horizontalInput = Input.GetAxis("Horizontal");
+            float verticalInput = Input.GetAxis("Vertical");
 
-        Vector3 direction = new Vector3(horizontalInput, verticalInput, 0);
+            Vector3 direction = new Vector3(horizontalInput, verticalInput, 0);
 
-        transform.Translate(direction * _speed * Time.deltaTime);
+            transform.Translate(direction * _speed * Time.deltaTime);
 
-        if (transform.position.y >= 0)
-        {
-            transform.position = new Vector3(transform.position.x, 0, 0);
-        }
+            if (transform.position.y >= 0)
+            {
+                transform.position = new Vector3(transform.position.x, 0, 0);
+            }
 
-        else if (transform.position.y <= -3.8f)
-        {
-            transform.position = new Vector3(transform.position.x, -3.8f, 0);
-        }
+            else if (transform.position.y <= -3.8f)
+            {
+                transform.position = new Vector3(transform.position.x, -3.8f, 0);
+            }
 
-        if (transform.position.y >= 11.3f)
-        {
-            transform.position = new Vector3(-11.3f, transform.position.y, 0);
-        }
-        else if (transform.position.x <= -11.3f)
-        {
-            transform.position = new Vector3(11.3f, transform.position.y, 0);
-        }
+            if (transform.position.y >= 11.3f)
+            {
+                transform.position = new Vector3(-11.3f, transform.position.y, 0);
+            }
+            else if (transform.position.x <= -11.3f)
+            {
+                transform.position = new Vector3(11.3f, transform.position.y, 0);
+            }  
     }
 
     void FireLaser()
     {
-        _coolDown = Time.time + _firerate;
-        if (_quadFiringAct == true)
-        {
-            Instantiate(_quadFiring, transform.position + new Vector3(1.15f, 0.7f, 0), Quaternion.identity);
-            if (transform.position.y > 8f)
+            _coolDown = Time.time + _firerate;
+            if (_quadFiringAct == true)
             {
-                Destroy(_quadFiring);
+                Instantiate(_quadFiring, transform.position + new Vector3(1.15f, 0.7f, 0), Quaternion.identity);
+                if (transform.position.y > 8f)
+                {
+                    Destroy(_quadFiring);
+                }
             }
-        }
 
-        else
-        {
-            Instantiate(_blueLaserPrefab, transform.position + new Vector3(1.15f, 1.05f, 0), Quaternion.identity);
-            Instantiate(_blueLaserPrefab, transform.position + new Vector3(-1.15f, 1.05f, 0), Quaternion.identity);
-        }
-        _audioSource.Play();
+            else
+            {
+                Instantiate(_blueLaserPrefab, transform.position + new Vector3(1.15f, 1.05f, 0), Quaternion.identity);
+                Instantiate(_blueLaserPrefab, transform.position + new Vector3(-1.15f, 1.05f, 0), Quaternion.identity);
+            }
+            _audioSource.Play();
     }
 
     void QuadFiringAct()
@@ -200,6 +204,7 @@ public class NewBehaviourScript : MonoBehaviour
         yield return new WaitForSeconds(5.0f);
         _quadFiringAct = false;
     }
+
     public void shieldIsActiv()
     {
         _shieldVisual.SetActive(true);
@@ -224,18 +229,6 @@ public class NewBehaviourScript : MonoBehaviour
         {
             Debug.Log("all Engine and wing right and left has been repair !!!");
         }
-       /* if (_lives == 4)
-        {
-            Debug.Log("wing left get some armor");
-        }
-        if (_lives == 5)
-        {
-            Debug.Log("wing right get some armor");
-        }
-        else if (_lives == 6)
-        {
-            Debug.Log("all frame been upgrade");
-        }*/
        uiManager.updatelive(_lives);
         StartCoroutine(HealsDownTime());
     }
@@ -322,10 +315,5 @@ public class NewBehaviourScript : MonoBehaviour
         {
             _spawnManager.SpawnConttrol(false);
         }
-    }
-
-    public void swicthcond()
-    {
-        EndLvlCon = true;
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class EnemyBoss : MonoBehaviour
 {
@@ -39,7 +40,9 @@ public class EnemyBoss : MonoBehaviour
     [SerializeField]
     private Transform pointA, pointB, pointC;
     private Vector3 currentTarget;
-    
+
+    public GameObject EndLevel;
+    public Text GoTo;
 
 
     // Start is called before the first frame update
@@ -189,6 +192,8 @@ public class EnemyBoss : MonoBehaviour
         }
         if (HitPoints == 0)
         {
+            GoTo.gameObject.SetActive(true);
+            EndLevel.SetActive(true);
             Debug.Log("Enemy Been Destroy");
             Destroy(this.gameObject);
             Defeat();
@@ -197,8 +202,7 @@ public class EnemyBoss : MonoBehaviour
 
     public void Defeat()
     {
-        GManager.Winning();
-        _uiManager.WinnerSec();
+        SPmanager.OnPlayerDeath();
         Debug.Log("the Game is END!");
     }
 }

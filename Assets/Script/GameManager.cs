@@ -7,6 +7,22 @@ public class GameManager : MonoBehaviour
 {
     private bool _isGameOver;
     private bool _isWin;
+    public GameObject MCPanel;
+    private UIManager uiManager;
+
+    private void Start()
+    {
+        uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+        if (uiManager == null)
+        {
+            Debug.LogError("UIManager is not found or not assigned.");
+        }
+
+        if (MCPanel == null)
+        {
+            Debug.LogError("MCPanel is not assigned in the inspector.");
+        }
+    }
 
     private void Update()
     {
@@ -26,6 +42,14 @@ public class GameManager : MonoBehaviour
     public void Winning()
     {
         _isWin = true;
+        if (MCPanel != null)
+        {
+            MCPanel.SetActive(true);
+        }
+        else
+        {
+            Debug.LogError("MCPanel is not assigned.");
+        }
     }
 
     public void GameOver()
